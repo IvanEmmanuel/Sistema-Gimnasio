@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="GrupoModulos">
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -69,13 +73,13 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jToggleButton1" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jToggleButton2" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jToggleButton3" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jToggleButton4" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jToggleButton5" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jToggleButton6" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jToggleButton7" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnClientes" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnMembresias" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnReservas" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnPersonal" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnInventarios" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnReportes" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnConfiguracion" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -85,60 +89,81 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jToggleButton1" min="-2" pref="45" max="-2" attributes="0"/>
+                  <Component id="btnClientes" min="-2" pref="45" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jToggleButton2" min="-2" pref="45" max="-2" attributes="0"/>
+                  <Component id="btnMembresias" min="-2" pref="45" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jToggleButton3" min="-2" pref="45" max="-2" attributes="0"/>
+                  <Component id="btnReservas" min="-2" pref="45" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jToggleButton4" min="-2" pref="45" max="-2" attributes="0"/>
+                  <Component id="btnPersonal" min="-2" pref="45" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jToggleButton5" min="-2" pref="45" max="-2" attributes="0"/>
+                  <Component id="btnInventarios" min="-2" pref="45" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jToggleButton6" min="-2" pref="45" max="-2" attributes="0"/>
+                  <Component id="btnReportes" min="-2" pref="45" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jToggleButton7" min="-2" pref="45" max="-2" attributes="0"/>
+                  <Component id="btnConfiguracion" min="-2" pref="45" max="-2" attributes="0"/>
                   <EmptySpace pref="195" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JToggleButton" name="jToggleButton1">
+        <Component class="javax.swing.JToggleButton" name="btnClientes">
           <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="GrupoModulos"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Gesti&#xf3;n de Clientes"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnClientesActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JToggleButton" name="jToggleButton2">
+        <Component class="javax.swing.JToggleButton" name="btnMembresias">
           <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="GrupoModulos"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Membres&#xed;as y Pagos"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JToggleButton" name="jToggleButton3">
+        <Component class="javax.swing.JToggleButton" name="btnReservas">
           <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="GrupoModulos"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Reservas y Clases"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JToggleButton" name="jToggleButton4">
+        <Component class="javax.swing.JToggleButton" name="btnPersonal">
           <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="GrupoModulos"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Gesti&#xf3;n de Personal"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JToggleButton" name="jToggleButton5">
+        <Component class="javax.swing.JToggleButton" name="btnInventarios">
           <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="GrupoModulos"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Inventario"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JToggleButton" name="jToggleButton6">
+        <Component class="javax.swing.JToggleButton" name="btnReportes">
           <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="GrupoModulos"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Reportes y An&#xe1;lisis"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JToggleButton" name="jToggleButton7">
+        <Component class="javax.swing.JToggleButton" name="btnConfiguracion">
           <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="GrupoModulos"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Administraci&#xf3;n y Configuraci&#xf3;n"/>
           </Properties>
         </Component>

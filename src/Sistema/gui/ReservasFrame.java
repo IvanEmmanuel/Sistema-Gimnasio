@@ -8,12 +8,12 @@ package Sistema.gui;
  *
  * @author IVAN
  */
-public class Personal extends javax.swing.JInternalFrame {
+public class ReservasFrame extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form Personal
+     * Creates new form Reservas
      */
-    public Personal() {
+    public ReservasFrame() {
         initComponents();
     }
 
@@ -25,6 +25,8 @@ public class Personal extends javax.swing.JInternalFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
+        setTitle("Reservas");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

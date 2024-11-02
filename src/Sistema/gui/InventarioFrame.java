@@ -8,12 +8,12 @@ package Sistema.gui;
  *
  * @author IVAN
  */
-public class Configuracion extends javax.swing.JInternalFrame {
+public class InventarioFrame extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form Configuracion
+     * Creates new form Inventario
      */
-    public Configuracion() {
+    public InventarioFrame() {
         initComponents();
     }
 
@@ -25,6 +25,8 @@ public class Configuracion extends javax.swing.JInternalFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
+        setTitle("Inventario");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

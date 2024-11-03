@@ -43,11 +43,11 @@ public class Principal extends javax.swing.JFrame {
         contenedorModulos.setLayout(contenedorModulosLayout);
         contenedorModulosLayout.setHorizontalGroup(
             contenedorModulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 965, Short.MAX_VALUE)
+            .addGap(0, 1115, Short.MAX_VALUE)
         );
         contenedorModulosLayout.setVerticalGroup(
             contenedorModulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 750, Short.MAX_VALUE)
         );
 
         GrupoModulos.add(btnClientes);
@@ -139,7 +139,7 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(btnReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnConfiguracion, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -159,53 +159,102 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(contenedorModulos))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(contenedorModulos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    ClientesFrame cliente;
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
-        ClientesFrame cliente = new ClientesFrame();
-        contenedorModulos.add(cliente);
-        cliente.setVisible(true);
+        if(cliente == null){
+            cliente = new ClientesFrame();
+            contenedorModulos.add(cliente);
+            contenedorModulos.getDesktopManager().maximizeFrame(cliente);
+            cliente.setVisible(true);
+        }
+        else{
+            contenedorModulos.getDesktopManager().maximizeFrame(cliente);
+        }
     }//GEN-LAST:event_btnClientesActionPerformed
-
+    MembresiasFrame membresia;
     private void btnMembresiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMembresiasActionPerformed
-        MembresiasFrame membresia = new MembresiasFrame();
-        contenedorModulos.add(membresia);
-        membresia.setVisible(true);
+        if(membresia == null){
+            membresia = new MembresiasFrame();
+            contenedorModulos.add(membresia);
+            contenedorModulos.getDesktopManager().maximizeFrame(membresia);
+            membresia.setVisible(true);
+        }
+        else{
+            contenedorModulos.getDesktopManager().maximizeFrame(membresia);
+        }
     }//GEN-LAST:event_btnMembresiasActionPerformed
-
+    ReservasFrame reserva;
     private void btnReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservasActionPerformed
-        ReservasFrame reserva = new ReservasFrame();
-        contenedorModulos.add(reserva);
-        reserva.setVisible(true);
+        if(reserva == null){
+            reserva = new ReservasFrame();
+            contenedorModulos.add(reserva);
+            contenedorModulos.getDesktopManager().maximizeFrame(reserva);
+            reserva.setVisible(true);
+        }
+        else{
+            contenedorModulos.getDesktopManager().maximizeFrame(reserva);
+        }
     }//GEN-LAST:event_btnReservasActionPerformed
-
+    PersonalFrame personal;
     private void btnPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonalActionPerformed
-        PersonalFrame personal = new PersonalFrame();
-        contenedorModulos.add(personal);
-        personal.setVisible(true);
+        if(personal == null){
+            personal = new PersonalFrame();
+            contenedorModulos.add(personal);
+            contenedorModulos.getDesktopManager().maximizeFrame(personal);
+            personal.setVisible(true);
+        }
+        else{
+            contenedorModulos.getDesktopManager().maximizeFrame(personal);
+        }
+        
     }//GEN-LAST:event_btnPersonalActionPerformed
-
+    InventarioFrame inventario;
     private void btnInventariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventariosActionPerformed
-        InventarioFrame inventario = new InventarioFrame();
-        contenedorModulos.add(inventario);
-        inventario.setVisible(true);
+        if(inventario == null){
+            inventario = new InventarioFrame();
+            contenedorModulos.add(inventario);
+            contenedorModulos.getDesktopManager().maximizeFrame(inventario);
+            inventario.setVisible(true);
+        }
+        else{
+            contenedorModulos.getDesktopManager().maximizeFrame(inventario);
+        }
+        
     }//GEN-LAST:event_btnInventariosActionPerformed
-
+    ReportesFrame reporte;
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
-        ReportesFrame reporte = new ReportesFrame();
-        contenedorModulos.add(reporte);
-        reporte.setVisible(true);
+        if(reporte == null){
+            reporte = new ReportesFrame();
+            contenedorModulos.add(reporte);
+            contenedorModulos.getDesktopManager().maximizeFrame(reporte);
+            reporte.setVisible(true);
+        }
+        else{
+            contenedorModulos.getDesktopManager().maximizeFrame(reporte);
+        }
     }//GEN-LAST:event_btnReportesActionPerformed
-
+    ConfiguracionFrame configuracion;
     private void btnConfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfiguracionActionPerformed
-        ConfiguracionFrame configuracion = new ConfiguracionFrame();
-        contenedorModulos.add(configuracion);
-        configuracion.setVisible(true);
+        if(configuracion == null){
+            configuracion = new ConfiguracionFrame();
+            contenedorModulos.add(configuracion);
+            contenedorModulos.getDesktopManager().maximizeFrame(configuracion);
+            configuracion.setVisible(true);
+        }
+        
+        else{
+            contenedorModulos.getDesktopManager().maximizeFrame(configuracion);
+        }
+        
     }//GEN-LAST:event_btnConfiguracionActionPerformed
 
     /**

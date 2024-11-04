@@ -30,7 +30,7 @@ public class Principal extends javax.swing.JFrame {
         contenedorModulos = new javax.swing.JDesktopPane();
         jPanel1 = new javax.swing.JPanel();
         btnClientes = new javax.swing.JToggleButton();
-        btnMembresias = new javax.swing.JToggleButton();
+        btnMembresiasPagos = new javax.swing.JToggleButton();
         btnReservas = new javax.swing.JToggleButton();
         btnPersonal = new javax.swing.JToggleButton();
         btnInventarios = new javax.swing.JToggleButton();
@@ -47,7 +47,7 @@ public class Principal extends javax.swing.JFrame {
         );
         contenedorModulosLayout.setVerticalGroup(
             contenedorModulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 750, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         GrupoModulos.add(btnClientes);
@@ -58,11 +58,11 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        GrupoModulos.add(btnMembresias);
-        btnMembresias.setText("Membresías y Pagos");
-        btnMembresias.addActionListener(new java.awt.event.ActionListener() {
+        GrupoModulos.add(btnMembresiasPagos);
+        btnMembresiasPagos.setText("Membresías y Pagos");
+        btnMembresiasPagos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMembresiasActionPerformed(evt);
+                btnMembresiasPagosActionPerformed(evt);
             }
         });
 
@@ -114,7 +114,7 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnMembresias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnMembresiasPagos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnReservas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnPersonal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnInventarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -128,7 +128,7 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(btnClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnMembresias, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnMembresiasPagos, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnReservas, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -139,7 +139,7 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(btnReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnConfiguracion, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(357, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -159,9 +159,7 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(contenedorModulos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(contenedorModulos))
                 .addContainerGap())
         );
 
@@ -181,7 +179,7 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnClientesActionPerformed
     MembresiasFrame membresia;
-    private void btnMembresiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMembresiasActionPerformed
+    private void btnMembresiasPagosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMembresiasPagosActionPerformed
         if(membresia == null){
             membresia = new MembresiasFrame();
             contenedorModulos.add(membresia);
@@ -191,7 +189,7 @@ public class Principal extends javax.swing.JFrame {
         else{
             contenedorModulos.getDesktopManager().maximizeFrame(membresia);
         }
-    }//GEN-LAST:event_btnMembresiasActionPerformed
+    }//GEN-LAST:event_btnMembresiasPagosActionPerformed
     ReservasFrame reserva;
     private void btnReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservasActionPerformed
         if(reserva == null){
@@ -297,7 +295,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JToggleButton btnClientes;
     private javax.swing.JToggleButton btnConfiguracion;
     private javax.swing.JToggleButton btnInventarios;
-    private javax.swing.JToggleButton btnMembresias;
+    private javax.swing.JToggleButton btnMembresiasPagos;
     private javax.swing.JToggleButton btnPersonal;
     private javax.swing.JToggleButton btnReportes;
     private javax.swing.JToggleButton btnReservas;

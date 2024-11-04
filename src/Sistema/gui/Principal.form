@@ -42,10 +42,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel1" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Component id="contenedorModulos" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="contenedorModulos" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -63,7 +60,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="750" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -77,7 +74,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="btnClientes" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btnMembresias" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnMembresiasPagos" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnReservas" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnPersonal" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnInventarios" alignment="0" max="32767" attributes="0"/>
@@ -94,7 +91,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnClientes" min="-2" pref="45" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="btnMembresias" min="-2" pref="45" max="-2" attributes="0"/>
+                  <Component id="btnMembresiasPagos" min="-2" pref="45" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnReservas" min="-2" pref="45" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -105,7 +102,7 @@
                   <Component id="btnReportes" min="-2" pref="45" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnConfiguracion" min="-2" pref="45" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="357" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -122,7 +119,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnClientesActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JToggleButton" name="btnMembresias">
+        <Component class="javax.swing.JToggleButton" name="btnMembresiasPagos">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="GrupoModulos"/>
@@ -130,7 +127,7 @@
             <Property name="text" type="java.lang.String" value="Membres&#xed;as y Pagos"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMembresiasActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMembresiasPagosActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JToggleButton" name="btnReservas">

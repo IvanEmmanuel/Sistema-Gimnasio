@@ -11,7 +11,7 @@ package Sistema.gui;
 public class PagosFrame extends javax.swing.JDialog {
 
     /**
-     * Creates new form PagosFrame
+     * Creates new form Pagos
      */
     public PagosFrame(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -68,6 +68,7 @@ public class PagosFrame extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(PagosFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */

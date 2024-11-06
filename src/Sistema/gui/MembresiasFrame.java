@@ -4,6 +4,8 @@
  */
 package Sistema.gui;
 
+import javax.swing.JDialog;
+
 /**
  *
  * @author IVAN
@@ -27,31 +29,39 @@ public class MembresiasFrame extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         contenedorMembresiasPagos = new javax.swing.JDesktopPane();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnPagos = new javax.swing.JButton();
+        btnHistorial = new javax.swing.JButton();
+        btnMembresia = new javax.swing.JButton();
 
         setTitle("Membresías y Pagos");
 
-        jButton2.setText("Pagos");
-
-        jButton3.setText("Historial");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnPagos.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnPagos.setText("Pagos");
+        btnPagos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnPagosActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Membresias");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnHistorial.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnHistorial.setText("Historial");
+        btnHistorial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnHistorialActionPerformed(evt);
             }
         });
 
-        contenedorMembresiasPagos.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        contenedorMembresiasPagos.setLayer(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        contenedorMembresiasPagos.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        btnMembresia.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnMembresia.setText("Miembros");
+        btnMembresia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMembresiaActionPerformed(evt);
+            }
+        });
+
+        contenedorMembresiasPagos.setLayer(btnPagos, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        contenedorMembresiasPagos.setLayer(btnHistorial, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        contenedorMembresiasPagos.setLayer(btnMembresia, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout contenedorMembresiasPagosLayout = new javax.swing.GroupLayout(contenedorMembresiasPagos);
         contenedorMembresiasPagos.setLayout(contenedorMembresiasPagosLayout);
@@ -59,18 +69,18 @@ public class MembresiasFrame extends javax.swing.JInternalFrame {
             contenedorMembresiasPagosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contenedorMembresiasPagosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnMembresia, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnPagos, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         contenedorMembresiasPagosLayout.setVerticalGroup(
             contenedorMembresiasPagosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
-            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnMembresia, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
+            .addComponent(btnPagos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnHistorial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -87,19 +97,35 @@ public class MembresiasFrame extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnMembresiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMembresiaActionPerformed
+        MiembroFrame miembro = new MiembroFrame(null,true);
+        miembro.setVisible(true);
+        miembro.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        miembro.setLocation(600, 150);
+        miembro.setAlwaysOnTop(true);
+    }//GEN-LAST:event_btnMembresiaActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void btnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialActionPerformed
+        HistorialFrame historial = new HistorialFrame(null,true);
+        historial.setVisible(true);
+        historial.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        historial.setLocation(600, 150);
+        historial.setAlwaysOnTop(true);
+    }//GEN-LAST:event_btnHistorialActionPerformed
+
+    private void btnPagosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagosActionPerformed
+        PagosFrame pago = new PagosFrame(null,true);
+        pago.setVisible(true);
+        pago.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        pago.setLocation(600, 150);
+        pago.setAlwaysOnTop(true);
+    }//GEN-LAST:event_btnPagosActionPerformed
       
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnHistorial;
+    private javax.swing.JButton btnMembresia;
+    private javax.swing.JButton btnPagos;
     private javax.swing.JDesktopPane contenedorMembresiasPagos;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     // End of variables declaration//GEN-END:variables
 }

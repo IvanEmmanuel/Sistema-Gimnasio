@@ -58,7 +58,7 @@ public class Principal extends javax.swing.JFrame {
         });
 
         GrupoModulos.add(btnReservas);
-        btnReservas.setText("Reservas y Clases");
+        btnReservas.setText("Clases");
         btnReservas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReservasActionPerformed(evt);
@@ -146,7 +146,7 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(contenedorModulos)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
@@ -169,10 +169,10 @@ public class Principal extends javax.swing.JFrame {
             contenedorModulos.getDesktopManager().maximizeFrame(membresia);
         }
     }//GEN-LAST:event_btnMembresiasPagosActionPerformed
-    ReservasFrame reserva;
+    ClasesFrame reserva;
     private void btnReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservasActionPerformed
         if(reserva == null){
-            reserva = new ReservasFrame();
+            reserva = new ClasesFrame();
             contenedorModulos.add(reserva);
             contenedorModulos.getDesktopManager().maximizeFrame(reserva);
             reserva.setVisible(true);

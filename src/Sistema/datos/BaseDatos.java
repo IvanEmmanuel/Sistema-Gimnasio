@@ -1,6 +1,8 @@
 package Sistema.datos;
 
+import Sistema.pojos.Membresias;
 import Sistema.pojos.Miembros;
+import Sistema.pojos.Pagos;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.Connection;
@@ -72,7 +74,129 @@ public class BaseDatos {
             }
         }
     }
+    
+    public void insertarMembresia(Membresias membresia){
+        try {
+            
+            /*Instanciamos el objeto de la clase conexion*/
+            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
+            
+            //FileImputStream fis = new FileImputStream(miembro.getFotoMiembro());
+            
+            String sql = "INSERT INTO membresias (id_membresia, id_miembro, tipo_membresia, "
+                    + "fecha_inicio_membresia, fecha_fin_membresia, estado_membresia"
+                    + ") VALUES (?, ?, ?, ?, ?, ?)";
+            
+            st = conn.prepareStatement(sql);
+            st.setInt(1, membresia.getIdMembresia());
+            st.setInt(2, membresia.getIdMiembro());
+            st.setString(3, membresia.getTipoMembresia());
+            st.setString(4, membresia.getFechaInicioMembresia());
+            st.setString(5, membresia.getFechaFinMembresia());
+            st.setString(6, membresia.getEstadoMembresia());
+            
+            
+            st.executeUpdate();
+            
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        finally{
+            try {
+                st.close();            
+                conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+    
+    public void insertarPagos(Pagos pago){
+        try {
+            
+            /*Instanciamos el objeto de la clase conexion*/
+            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
+            
+            //FileImputStream fis = new FileImputStream(miembro.getFotoMiembro());
+            
+            String sql = "INSERT INTO membresias (id_pago, id_membresia, monto, "
+                    + "fecha_pago, metodo_pago"
+                    + ") VALUES (?, ?, ?, ?, ?)";
+            
+        st = conn.prepareStatement(sql);
+        st.setInt(1, pago.getIdPago());
+        st.setInt(2, pago.getIdMembresia());
+        st.setDouble(3, pago.getMonto());
+        st.setString(4, pago.getFechaPago());
+        st.setString(5, pago.getMetodoPago());
+            
+            
+        st.executeUpdate();
+            
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        finally{
+            try {
+                st.close();            
+                conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+    
+    public void obtenerMiembro(){
+        try {
+            
+        /*Instanciamos el objeto de la clase conexion*/
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
+            
+        //FileImputStream fis = new FileImputStream(miembro.getFotoMiembro());
+            
+        String sql = "SELECT * FROM miembros";
+        
+        st = conn.prepareStatement(sql);
+        
+        rs = st.executeQuery();
+        
+        //id_miembro, nombre_miembro, apellido_paterno_miembro, "+ "apellido_materno_miembro, email_miembro, telefono_miembro, direccion_miembro, "+ "nacimiento_miembro, foto_miembro, fecha_inicio_miembro
+        
+        while(rs.next()){
+            int id = rs.getInt("id_miembro");
+            String nombre = rs.getString("nombre_miembro");
+            String apePaterno = rs.getString("apellido_paterno_miembro");
+            String apeMaterno = rs.getString("apellido_materno_miembro");
+            String email = rs.getString("nombre_miembro");
+            String telefonoMiembro = rs.getString("nombre_miembro");
+            String direccionMiembro = rs.getString("nombre_miembro");
+            String nacimientoMiembro = rs.getString("nombre_miembro");
+            String foto = rs.getString("foto_miembro");
+            String fechaInicio = rs.getString("fecha_inicio_miembro");
+            
+            
+            Miembros miembro = new Miembros(id, nombre, apePaterno, apeMaterno, email, telefonoMiembro, direccionMiembro, nacimientoMiembro, fechaInicio, null);
+        }
+            
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        finally{
+            try {
+                st.close();            
+                conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
 }
+
+
 
 
 /*Query para traer todos los datos de una BD*/

@@ -41,7 +41,8 @@ public class TiposMembresia {
     }
     
     
-    
-    
-    
+    @Override
+    public String toString(){
+        return this.nombreMembresia;
+    } 
 }

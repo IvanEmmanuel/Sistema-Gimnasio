@@ -3,6 +3,8 @@ package Sistema.datos;
 import Sistema.pojos.Membresias;
 import Sistema.pojos.Miembros;
 import Sistema.pojos.Pagos;
+import Sistema.pojos.TiposMembresia;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.Connection;
@@ -11,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -34,29 +37,33 @@ public class BaseDatos {
         }
     }
     
-    public void insertarMiembro(Miembros miembro){
+    /**********      Esta clase nos permite añadir a un nuevo miembro a la base de datos         ***************/
+    
+    public void insertarMiembro(Miembros miembro) throws FileNotFoundException{
         try {
             
             /*Instanciamos el objeto de la clase conexion*/
             conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
             
-            //FileImputStream fis = new FileImputStream(miembro.getFotoMiembro());
+            File fileFoto = miembro.getFotoMiembro();
+            FileInputStream fis = new FileInputStream(fileFoto);
             
-            String sql = "INSERT INTO miembros (id_miembro, nombre_miembro, apellido_paterno_miembro, "
+            String sql = "INSERT INTO miembros (nombre_miembro, apellido_paterno_miembro, "
                     + "apellido_materno_miembro, email_miembro, telefono_miembro, direccion_miembro, "
-                    + "nacimiento_miembro, foto_miembro, fecha_inicio_miembro) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    + "nacimiento_miembro, foto_miembro, fecha_inicio_miembro) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             
             st = conn.prepareStatement(sql);
-            st.setInt(1, miembro.getIdMiembro());
-            st.setString(2, miembro.getNombre());
-            st.setString(3, miembro.getApellidoPaterno());
+            st.setString(1, miembro.getNombre());
+            st.setString(2, miembro.getApellidoPaterno());
+            st.setString(3, miembro.getApellidoMaterno());
             st.setString(4, miembro.getEmail());
             st.setString(5, miembro.getTelefono());
             st.setString(6, miembro.getDireccion());
             st.setString(7, miembro.getFechaNacimiento());
-            st.setString(8, miembro.getFechaInicio());
-            //st.setBinaryStream(9, fis, (int)miembro.getFotoMiembro().length());
-            st.setString(10, miembro.getApellidoMaterno());
+            long tamanoFoto = fileFoto.length();
+            st.setBinaryStream(8, fis, tamanoFoto);
+            st.setString(9, miembro.getFechaInicio());
+            
             
             
             st.executeUpdate();
@@ -75,13 +82,14 @@ public class BaseDatos {
         }
     }
     
+    
+    /**********      Esta clase nos permite añadir una nueva membresia a la base de datos         ***************/
+    
     public void insertarMembresia(Membresias membresia){
         try {
             
             /*Instanciamos el objeto de la clase conexion*/
             conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
-            
-            //FileImputStream fis = new FileImputStream(miembro.getFotoMiembro());
             
             String sql = "INSERT INTO membresias (id_membresia, id_miembro, tipo_membresia, "
                     + "fecha_inicio_membresia, fecha_fin_membresia, estado_membresia"
@@ -112,13 +120,13 @@ public class BaseDatos {
         }
     }
     
+    /**********      Esta clase nos permite añadir un nuevo pago a la base de datos         ***************/
+    
     public void insertarPagos(Pagos pago){
         try {
             
             /*Instanciamos el objeto de la clase conexion*/
             conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
-            
-            //FileImputStream fis = new FileImputStream(miembro.getFotoMiembro());
             
             String sql = "INSERT INTO membresias (id_pago, id_membresia, monto, "
                     + "fecha_pago, metodo_pago"
@@ -148,37 +156,24 @@ public class BaseDatos {
         }
     }
     
-    public void obtenerMiembro(){
+    /**********      Esta clase nos permite añadir un nuevo tipo de membresia a la base de datos         ***************/
+    
+    public void insertarTipoMembresia(TiposMembresia tipo){
         try {
             
-        /*Instanciamos el objeto de la clase conexion*/
-        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
+            /*Instanciamos el objeto de la clase conexion*/
+            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
             
-        //FileImputStream fis = new FileImputStream(miembro.getFotoMiembro());
+            String sql = "INSERT INTO tipos_membresia (id_tipo, nombre_membresia, estado) "
+                    + "VALUES (?, ?, ?)";
             
-        String sql = "SELECT * FROM miembros";
-        
         st = conn.prepareStatement(sql);
-        
-        rs = st.executeQuery();
-        
-        //id_miembro, nombre_miembro, apellido_paterno_miembro, "+ "apellido_materno_miembro, email_miembro, telefono_miembro, direccion_miembro, "+ "nacimiento_miembro, foto_miembro, fecha_inicio_miembro
-        
-        while(rs.next()){
-            int id = rs.getInt("id_miembro");
-            String nombre = rs.getString("nombre_miembro");
-            String apePaterno = rs.getString("apellido_paterno_miembro");
-            String apeMaterno = rs.getString("apellido_materno_miembro");
-            String email = rs.getString("nombre_miembro");
-            String telefonoMiembro = rs.getString("nombre_miembro");
-            String direccionMiembro = rs.getString("nombre_miembro");
-            String nacimientoMiembro = rs.getString("nombre_miembro");
-            String foto = rs.getString("foto_miembro");
-            String fechaInicio = rs.getString("fecha_inicio_miembro");
+        st.setInt(1, tipo.getIdTipoMembresia());
+        st.setString(2, tipo.getNombreMembresia());
+        st.setInt(3, tipo.getEstadoMembresia());
             
             
-            Miembros miembro = new Miembros(id, nombre, apePaterno, apeMaterno, email, telefonoMiembro, direccionMiembro, nacimientoMiembro, fechaInicio, null);
-        }
+        st.executeUpdate();
             
             
         } catch (SQLException ex) {
@@ -193,10 +188,197 @@ public class BaseDatos {
             }
         }
     }
-
+    
+    /**********      Esta clase nos permite obtener todos los registros de la tabla miembros         ***************/
+    
+    public ArrayList<Miembros> obtenerMiembro(){
+        
+        ArrayList<Miembros> listaMiembros = new ArrayList<Miembros>();
+        try {
+            
+        /*Instanciamos el objeto de la clase conexion*/
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
+            
+        String sql = "SELECT * FROM miembros";
+        
+        st = conn.prepareStatement(sql);
+        
+        rs = st.executeQuery();
+        
+        //id_miembro, nombre_miembro, apellido_paterno_miembro, "+ "apellido_materno_miembro, email_miembro, telefono_miembro, direccion_miembro, "+ "nacimiento_miembro, foto_miembro, fecha_inicio_miembro
+        
+        while(rs.next()){
+            int idMiembro = rs.getInt("id_miembro");
+            String nombre = rs.getString("nombre_miembro");
+            String apePaterno = rs.getString("apellido_paterno_miembro");
+            String apeMaterno = rs.getString("apellido_materno_miembro");
+            String email = rs.getString("email_miembro");
+            String telefonoMiembro = rs.getString("telefono_miembro");
+            String direccionMiembro = rs.getString("direccion_miembro");
+            String nacimientoMiembro = rs.getString("nacimiento_miembro");
+            //String foto = rs.getString("foto_miembro");
+            String fechaInicio = rs.getString("fecha_inicio_miembro");
+            
+            
+            Miembros miembro = new Miembros(idMiembro, nombre, apePaterno, apeMaterno, email, telefonoMiembro, direccionMiembro, nacimientoMiembro, fechaInicio, null);
+            listaMiembros.add(miembro);
+            
+        }
+            
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        finally{
+            try {
+                st.close();            
+                conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        
+        return listaMiembros;
+    }
+    
+    /**********      Esta clase nos permite obtener todos los registros de la tabla membresias         ***************/
+    
+    public ArrayList<Membresias> obtenerMembresia(){
+        
+        ArrayList<Membresias> listaMembresias = new ArrayList<Membresias>();
+        try {
+            
+        /*Instanciamos el objeto de la clase conexion*/
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
+            
+        String sql = "SELECT * FROM membresias";
+        
+        st = conn.prepareStatement(sql);
+        
+        rs = st.executeQuery();
+                
+        while(rs.next()){
+            int idMembresia = rs.getInt("id_membresia");
+            int idMiembro = rs.getInt("id_miembro");
+            String tipoMembresia = rs.getString("tipo_membresia");
+            String tiempoMembresia = rs.getString("tiempo_membresia");
+            String fechaInicio = rs.getString("fecha_inicio_membresia");
+            String fechaFin = rs.getString("fecha_fin_membresia");
+            String estadoMembresia = rs.getString("estado_membresia");
+            
+            
+            Membresias membresia = new Membresias(idMembresia, idMiembro, tipoMembresia, tiempoMembresia, fechaInicio, fechaFin, estadoMembresia);
+            listaMembresias.add(membresia);
+            
+        }
+            
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        finally{
+            try {
+                st.close();            
+                conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        
+        return listaMembresias;
+    }
+    
+    
+    /**********      Esta clase nos permite obtener todos los registros de la tabla pagos         ***************/
+    
+    public ArrayList<Pagos> obtenerPagos(){
+        
+        ArrayList<Pagos> listaPagos = new ArrayList<Pagos>();
+        try {
+            
+        /*Instanciamos el objeto de la clase conexion*/
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
+            
+        String sql = "SELECT * FROM pagos";
+        
+        st = conn.prepareStatement(sql);
+        
+        rs = st.executeQuery();
+                
+        while(rs.next()){
+            int idPago = rs.getInt("id_pago");
+            int idMembresia = rs.getInt("id_membresia");
+            double monto = rs.getDouble("monto");
+            String fechaPago = rs.getString("fecha_pago");
+            String metodoPago = rs.getString("metodo_pago");
+            
+            
+            Pagos pago = new Pagos(idPago, idMembresia, monto, fechaPago, metodoPago);
+            listaPagos.add(pago);
+            
+        }
+            
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        finally{
+            try {
+                st.close();            
+                conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        
+        return listaPagos;
+    }
+    
+    /**********      Esta clase nos permite obtener todos los registros de la tabla tipos membresias        ***************/
+    
+    public ArrayList<TiposMembresia> obtenerTiposMembresias(){
+        
+        ArrayList<TiposMembresia> listaTiposMembresias = new ArrayList<TiposMembresia>();
+        try {
+            
+        /*Instanciamos el objeto de la clase conexion*/
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
+            
+        String sql = "SELECT * FROM tipos_membresia";
+        
+        st = conn.prepareStatement(sql);
+        
+        rs = st.executeQuery();
+                
+        while(rs.next()){
+            int idTiposMembresia = rs.getInt("id_tipo");
+            String nombreMembresia = rs.getString("nombre_membresia");
+            int estado = rs.getInt("estado");
+            
+            
+            TiposMembresia tipos = new TiposMembresia(idTiposMembresia, nombreMembresia, estado);
+            listaTiposMembresias.add(tipos);
+            
+        }
+            
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        finally{
+            try {
+                st.close();            
+                conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        
+        return listaTiposMembresias;
+    }
+    
+    
 }
-
-
 
 
 /*Query para traer todos los datos de una BD*/

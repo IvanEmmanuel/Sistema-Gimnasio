@@ -9,14 +9,16 @@ public class Membresias {
     private int idMembresia;
     private int idMiembro;
     private String tipoMembresia;
+    private String tiempoMembresia;
     private String fechaInicioMembresia;
     private String fechaFinMembresia;
     private String estadoMembresia;
 
-    public Membresias(int idMembresia, int idMiembro, String tipoMembresia, String fechaInicioMembresia, String fechaFinMembresia, String estadoMembresia) {
+    public Membresias(int idMembresia, int idMiembro, String tipoMembresia, String tiempoMembresia, String fechaInicioMembresia, String fechaFinMembresia, String estadoMembresia) {
         this.idMembresia = idMembresia;
         this.idMiembro = idMiembro;
         this.tipoMembresia = tipoMembresia;
+        this.tiempoMembresia = tiempoMembresia;
         this.fechaInicioMembresia = fechaInicioMembresia;
         this.fechaFinMembresia = fechaFinMembresia;
         this.estadoMembresia = estadoMembresia;
@@ -44,6 +46,14 @@ public class Membresias {
 
     public void setTipoMembresia(String tipoMembresia) {
         this.tipoMembresia = tipoMembresia;
+    }
+    
+    public String gettiempoMembresia() {
+        return tiempoMembresia;
+    }
+
+    public void settiempoMembresia(String tiempoMembresia) {
+        this.tiempoMembresia = tiempoMembresia;
     }
 
     public String getFechaInicioMembresia() {

@@ -5,7 +5,9 @@
 package Sistema.gui;
 
 import Sistema.datos.BaseDatos;
+import Sistema.pojos.Membresias;
 import Sistema.pojos.Miembros;
+import Sistema.pojos.Pagos;
 import Sistema.pojos.TiposMembresia;
 import java.awt.Image;
 import java.io.File;
@@ -308,8 +310,9 @@ public class NuevoMiembroFrame extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
 
-        lblImagenMiembro.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lblImagenMiembro.setText("         Añadir Foto");
+        lblImagenMiembro.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblImagenMiembro.setForeground(new java.awt.Color(255, 255, 255));
+        lblImagenMiembro.setText("        Añadir Foto");
         lblImagenMiembro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 lblImagenMiembroMousePressed(evt);
@@ -347,7 +350,7 @@ public class NuevoMiembroFrame extends javax.swing.JDialog {
         lblFechaInicio.setText("DD/MM/YYYY");
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel17.setText("Fecha de Termino de la Membresía:");
+        jLabel17.setText("Fecha del Proximo Pago:");
 
         lblFechaTermino.setText("DD/MM/YYYY");
 
@@ -374,7 +377,7 @@ public class NuevoMiembroFrame extends javax.swing.JDialog {
 
         lblNumeroMeses.setText("...");
 
-        comboMetodoPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "- - - - - - - - - - - -", "Efectivo", "Tarjeta de Credito", "Tarjeta de debito", "Transferencia" }));
+        comboMetodoPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "- - - - - - - - - - - -", "Efectivo", "Tarjeta de Credito", "Tarjeta de Debito", "Transferencia" }));
 
         jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel25.setText("Precio de la Membresía");
@@ -450,6 +453,11 @@ public class NuevoMiembroFrame extends javax.swing.JDialog {
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton3.setForeground(new java.awt.Color(255, 51, 51));
         jButton3.setText("Cancelar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel10.setText("YYYY");
 
@@ -484,36 +492,6 @@ public class NuevoMiembroFrame extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel14)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel15))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblFechaInicio)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(comboTiposMembresias, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(43, 43, 43)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel17)
-                                    .addComponent(jLabel9))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(comboTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(81, 81, 81)
-                                        .addComponent(jLabel22))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblFechaTermino)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lblDescuento)
-                                        .addGap(24, 24, 24)))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel19)
@@ -556,9 +534,7 @@ public class NuevoMiembroFrame extends javax.swing.JDialog {
                                                         .addComponent(jLabel16)
                                                         .addGap(34, 34, 34)))
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(campoAno))
+                                                    .addComponent(campoAno, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
                                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                                                         .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -575,7 +551,37 @@ public class NuevoMiembroFrame extends javax.swing.JDialog {
                             .addComponent(jSeparator2)
                             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(23, 23, 23))))
+                        .addGap(23, 23, 23))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel15))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblFechaInicio)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(comboTiposMembresias, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(43, 43, 43)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel17)
+                                    .addComponent(jLabel9))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(comboTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(81, 81, 81)
+                                        .addComponent(jLabel22))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblFechaTermino)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblDescuento)
+                                        .addGap(24, 24, 24))))
+                            .addComponent(jLabel14))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -696,17 +702,25 @@ public class NuevoMiembroFrame extends javax.swing.JDialog {
         String precioSinSimbolo = totalString.replace("$", ""); // Quita el símbolo de pesos
         double total = Double.parseDouble(precioSinSimbolo); // Convierte a double
         
+        String tipoMem = tipoMembresia.getNombreMembresia();
+        
         if(imgMiembroFile == null){
             JOptionPane.showMessageDialog(this, "Debes Cargar una Fotografia");
         }
         else{
             try {
                 Miembros miembro = new Miembros(0, nombre, apellidoPaterno, apellidoMaterno, correo, telefono, direccion, fechaNacimiento, fechaInicio, imgMiembroFile);
+                Membresias membresia = new Membresias(0, 8, tipoMem, tiempoMembresia, fechaInicio, fechaTermino, "Activo");
+                Pagos pago = new Pagos(0, 6, total, fechaInicio, metodoPago);
                 base.insertarMiembro(miembro);
+                base.insertarMembresia(membresia);
+                base.insertarPagos(pago);
+                JOptionPane.showMessageDialog(this, "Datos Guardados Correctamente");
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(NuevoMiembroFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        this.dispose();
     }//GEN-LAST:event_btnGuardarMiembroActionPerformed
 
     private void comboTiempoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTiempoActionPerformed
@@ -788,6 +802,10 @@ public class NuevoMiembroFrame extends javax.swing.JDialog {
         lblTipoMembresia.setText(tipoMembresiaSeleccionada);
         cargarPrecioMembresi();
     }//GEN-LAST:event_comboTiposMembresiasActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     
     public static String fecha(){

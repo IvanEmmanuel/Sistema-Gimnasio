@@ -113,5 +113,10 @@ public class Miembros {
         this.fechaInicio = fechaInicio;
     }
     
+    @Override
+    public String toString(){
+        return this.nombre + " " + this.apellidoPaterno + " " + this.apellidoMaterno;
+    }
+    
     
 }

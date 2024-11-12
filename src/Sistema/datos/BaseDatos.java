@@ -87,18 +87,17 @@ public class BaseDatos {
     
     public void insertarMembresia(Membresias membresia){
         try {
-            
             /*Instanciamos el objeto de la clase conexion*/
             conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
             
-            String sql = "INSERT INTO membresias (id_membresia, id_miembro, tipo_membresia, "
+            String sql = "INSERT INTO membresias (id_miembro, tipo_membresia, tiempo_membresia, "
                     + "fecha_inicio_membresia, fecha_fin_membresia, estado_membresia"
                     + ") VALUES (?, ?, ?, ?, ?, ?)";
             
             st = conn.prepareStatement(sql);
-            st.setInt(1, membresia.getIdMembresia());
-            st.setInt(2, membresia.getIdMiembro());
-            st.setString(3, membresia.getTipoMembresia());
+            st.setInt(1, membresia.getIdMiembro());
+            st.setString(2, membresia.getTipoMembresia());
+            st.setString(3, membresia.gettiempoMembresia());
             st.setString(4, membresia.getFechaInicioMembresia());
             st.setString(5, membresia.getFechaFinMembresia());
             st.setString(6, membresia.getEstadoMembresia());
@@ -128,16 +127,15 @@ public class BaseDatos {
             /*Instanciamos el objeto de la clase conexion*/
             conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
             
-            String sql = "INSERT INTO membresias (id_pago, id_membresia, monto, "
+            String sql = "INSERT INTO pagos (id_membresia, monto, "
                     + "fecha_pago, metodo_pago"
-                    + ") VALUES (?, ?, ?, ?, ?)";
+                    + ") VALUES (?, ?, ?, ?)";
             
         st = conn.prepareStatement(sql);
-        st.setInt(1, pago.getIdPago());
-        st.setInt(2, pago.getIdMembresia());
-        st.setDouble(3, pago.getMonto());
-        st.setString(4, pago.getFechaPago());
-        st.setString(5, pago.getMetodoPago());
+        st.setInt(1, pago.getIdMembresia());
+        st.setDouble(2, pago.getMonto());
+        st.setString(3, pago.getFechaPago());
+        st.setString(4, pago.getMetodoPago());
             
             
         st.executeUpdate();

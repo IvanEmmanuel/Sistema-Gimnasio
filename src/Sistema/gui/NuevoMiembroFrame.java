@@ -451,7 +451,7 @@ public class NuevoMiembroFrame extends javax.swing.JDialog {
 
         jButton3.setBackground(new java.awt.Color(102, 102, 102));
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 51, 51));
+        jButton3.setForeground(new java.awt.Color(204, 0, 51));
         jButton3.setText("Cancelar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -525,22 +525,21 @@ public class NuevoMiembroFrame extends javax.swing.JDialog {
                                                         .addComponent(jLabel29)))
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addGroup(layout.createSequentialGroup()
-                                                        .addGap(26, 26, 26)
-                                                        .addComponent(comboMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addGap(11, 11, 11)
                                                         .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(29, 29, 29)
-                                                        .addComponent(jLabel16)
-                                                        .addGap(34, 34, 34)))
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(campoAno, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                                                        .addGap(18, 18, 18)
+                                                        .addComponent(jLabel16))
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addGap(18, 18, 18)
+                                                        .addComponent(comboMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addGroup(layout.createSequentialGroup()
                                                         .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                         .addComponent(jLabel10)
-                                                        .addGap(27, 27, 27))))))
+                                                        .addGap(27, 27, 27))
+                                                    .addComponent(campoAno)))))
                                     .addComponent(jLabel7)
                                     .addComponent(jLabel13))
                                 .addGap(18, 18, 18)
@@ -685,13 +684,13 @@ public class NuevoMiembroFrame extends javax.swing.JDialog {
     }//GEN-LAST:event_lblImagenMiembroMousePressed
 
     private void btnGuardarMiembroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarMiembroActionPerformed
+        String telefono = campoTelefono.getText();
+        String correo = campoCorreo.getText();
         String nombre = campoNombre.getText();
         String apellidoPaterno = campoPaterno.getText();
         String apellidoMaterno = campoMaterno.getText();
-        String telefono = campoTelefono.getText();
-        String correo = campoCorreo.getText();
-        String fechaNacimiento = comboDia.getSelectedItem() + "/" + comboMes.getSelectedItem() + "/" + campoAno.getText();
         String direccion = campoDireccion.getText();
+        String fechaNacimiento = comboDia.getSelectedItem() + "/" + comboMes.getSelectedItem() + "/" + campoAno.getText();
         TiposMembresia tipoMembresia = (TiposMembresia)comboTiposMembresias.getSelectedItem();
         String tiempoMembresia = comboTiempo.getSelectedItem().toString();
         String fechaInicio = lblFechaInicio.getText();
@@ -709,9 +708,9 @@ public class NuevoMiembroFrame extends javax.swing.JDialog {
         }
         else{
             try {
-                Miembros miembro = new Miembros(0, nombre, apellidoPaterno, apellidoMaterno, correo, telefono, direccion, fechaNacimiento, fechaInicio, imgMiembroFile);
-                Membresias membresia = new Membresias(0, 8, tipoMem, tiempoMembresia, fechaInicio, fechaTermino, "Activo");
-                Pagos pago = new Pagos(0, 6, total, fechaInicio, metodoPago);
+                Miembros miembro = new Miembros(telefono, correo, nombre, apellidoPaterno, apellidoMaterno, direccion, fechaNacimiento, fechaInicio, imgMiembroFile, true);
+                Membresias membresia = new Membresias(0, telefono, tipoMem, tiempoMembresia, fechaInicio, fechaTermino, true);
+                Pagos pago = new Pagos(0, telefono, total, fechaInicio, metodoPago, true);
                 base.insertarMiembro(miembro);
                 base.insertarMembresia(membresia);
                 base.insertarPagos(pago);
@@ -719,8 +718,8 @@ public class NuevoMiembroFrame extends javax.swing.JDialog {
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(NuevoMiembroFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
         this.dispose();
+        }
     }//GEN-LAST:event_btnGuardarMiembroActionPerformed
 
     private void comboTiempoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTiempoActionPerformed

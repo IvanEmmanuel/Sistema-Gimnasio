@@ -7,46 +7,48 @@ import java.io.File;
  * @author IVAN
  */
 public class Miembros {
-    private int idMiembro;
+    private String telefonoMiembro;
+    private String email;
     private String nombre;
     private String apellidoPaterno;
     private String apellidoMaterno;
-    private String email;
-    private String telefono;
     private String direccion;
     private String fechaNacimiento;
     private String fechaInicio;
     private File fotoMiembro;
+    private Boolean estadoMiembro;
 
-    public Miembros(int idMiembro, String nombre, String apellidoPaterno, String apellidoMaterno, 
-            String email, String telefono, String direccion, 
-            String fechaNacimiento, String fechaInicio, File fotoMiembro) {
-        this.idMiembro = idMiembro;
+    public Miembros(String telefonoMiembro, String email, String nombre, 
+            String apellidoPaterno, String apellidoMaterno, 
+            String direccion, String fechaNacimiento, String fechaInicio, 
+            File fotoMiembro, Boolean estadoMiembro) {
+        this.telefonoMiembro = telefonoMiembro;
+        this.email = email;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
-        this.email = email;
-        this.telefono = telefono;
         this.direccion = direccion;
         this.fechaNacimiento = fechaNacimiento;
         this.fechaInicio = fechaInicio;
         this.fotoMiembro = fotoMiembro;
+        this.estadoMiembro = estadoMiembro;
     }
 
-    public File getFotoMiembro() {
-        return fotoMiembro;
+
+    public String getTelefonoMiembro() {
+        return telefonoMiembro;
     }
 
-    public void setFotoMiembro(File fotoMiembro) {
-        this.fotoMiembro = fotoMiembro;
+    public void setTelefonoMiembro(String telefonoMiembro) {
+        this.telefonoMiembro = telefonoMiembro;
     }
 
-    public int getIdMiembro() {
-        return idMiembro;
+    public String getEmail() {
+        return email;
     }
 
-    public void setIdMiembro(int idMiembro) {
-        this.idMiembro = idMiembro;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getNombre() {
@@ -73,22 +75,6 @@ public class Miembros {
         this.apellidoMaterno = apellidoMaterno;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
     public String getDireccion() {
         return direccion;
     }
@@ -112,10 +98,27 @@ public class Miembros {
     public void setFechaInicio(String fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
+
+    public File getFotoMiembro() {
+        return fotoMiembro;
+    }
+
+    public void setFotoMiembro(File fotoMiembro) {
+        this.fotoMiembro = fotoMiembro;
+    }
+
+    public Boolean getEstadoMiembro() {
+        return estadoMiembro;
+    }
+
+    public void setEstadoMiembro(Boolean estadoMiembro) {
+        this.estadoMiembro = estadoMiembro;
+    }
+    
     
     @Override
     public String toString(){
-        return this.nombre + " " + this.apellidoPaterno + " " + this.apellidoMaterno;
+        return this.telefonoMiembro;
     }
     
     

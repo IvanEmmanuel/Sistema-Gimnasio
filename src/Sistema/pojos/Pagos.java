@@ -7,25 +7,19 @@ package Sistema.pojos;
 public class Pagos {
     
     private int idPago;
-    private int idMembresia;
+    private String telefonoMiembro;
     private double monto;
     private String fechaPago;
     private String metodoPago;
+    private Boolean estadoPago;
 
-    public Pagos(int idPago, int idMembresia, double monto, String fechaPago, String metodoPago) {
+    public Pagos(int idPago, String telefonoMiembro, double monto, String fechaPago, String metodoPago, Boolean estadoPago) {
         this.idPago = idPago;
-        this.idMembresia = idMembresia;
+        this.telefonoMiembro = telefonoMiembro;
         this.monto = monto;
         this.fechaPago = fechaPago;
         this.metodoPago = metodoPago;
-    }
-
-    public String getMetodoPago() {
-        return metodoPago;
-    }
-
-    public void setMetodoPago(String metodoPago) {
-        this.metodoPago = metodoPago;
+        this.estadoPago = estadoPago;
     }
 
     public int getIdPago() {
@@ -36,12 +30,12 @@ public class Pagos {
         this.idPago = idPago;
     }
 
-    public int getIdMembresia() {
-        return idMembresia;
+    public String getTelefonoMiembro() {
+        return telefonoMiembro;
     }
 
-    public void setIdMembresia(int idMembresia) {
-        this.idMembresia = idMembresia;
+    public void setTelefonoMiembro(String telefonoMiembro) {
+        this.telefonoMiembro = telefonoMiembro;
     }
 
     public double getMonto() {
@@ -59,7 +53,21 @@ public class Pagos {
     public void setFechaPago(String fechaPago) {
         this.fechaPago = fechaPago;
     }
-    
-    
-    
+
+    public String getMetodoPago() {
+        return metodoPago;
+    }
+
+    public void setMetodoPago(String metodoPago) {
+        this.metodoPago = metodoPago;
+    }
+
+    public Boolean getEstadoPago() {
+        return estadoPago;
+    }
+
+    public void setEstadoPago(Boolean estadoPago) {
+        this.estadoPago = estadoPago;
+    }
+
 }

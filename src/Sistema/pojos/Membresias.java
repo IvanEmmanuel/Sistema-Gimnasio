@@ -7,16 +7,16 @@ package Sistema.pojos;
 public class Membresias {
     
     private int idMembresia;
-    private int idMiembro;
+    private String telefonoMiembro;
     private String tipoMembresia;
     private String tiempoMembresia;
     private String fechaInicioMembresia;
     private String fechaFinMembresia;
-    private String estadoMembresia;
+    private Boolean estadoMembresia;
 
-    public Membresias(int idMembresia, int idMiembro, String tipoMembresia, String tiempoMembresia, String fechaInicioMembresia, String fechaFinMembresia, String estadoMembresia) {
+    public Membresias(int idMembresia, String telefonoMiembro, String tipoMembresia, String tiempoMembresia, String fechaInicioMembresia, String fechaFinMembresia, Boolean estadoMembresia) {
         this.idMembresia = idMembresia;
-        this.idMiembro = idMiembro;
+        this.telefonoMiembro = telefonoMiembro;
         this.tipoMembresia = tipoMembresia;
         this.tiempoMembresia = tiempoMembresia;
         this.fechaInicioMembresia = fechaInicioMembresia;
@@ -32,12 +32,12 @@ public class Membresias {
         this.idMembresia = idMembresia;
     }
 
-    public int getIdMiembro() {
-        return idMiembro;
+    public String getTelefonoMiembro() {
+        return telefonoMiembro;
     }
 
-    public void setIdMiembro(int idMiembro) {
-        this.idMiembro = idMiembro;
+    public void setTelefonoMiembro(String telefonoMiembro) {
+        this.telefonoMiembro = telefonoMiembro;
     }
 
     public String getTipoMembresia() {
@@ -47,12 +47,12 @@ public class Membresias {
     public void setTipoMembresia(String tipoMembresia) {
         this.tipoMembresia = tipoMembresia;
     }
-    
-    public String gettiempoMembresia() {
+
+    public String getTiempoMembresia() {
         return tiempoMembresia;
     }
 
-    public void settiempoMembresia(String tiempoMembresia) {
+    public void setTiempoMembresia(String tiempoMembresia) {
         this.tiempoMembresia = tiempoMembresia;
     }
 
@@ -72,12 +72,13 @@ public class Membresias {
         this.fechaFinMembresia = fechaFinMembresia;
     }
 
-    public String getEstadoMembresia() {
+    public Boolean getEstadoMembresia() {
         return estadoMembresia;
     }
 
-    public void setEstadoMembresia(String estadoMembresia) {
+    public void setEstadoMembresia(Boolean estadoMembresia) {
         this.estadoMembresia = estadoMembresia;
     }
+
     
 }

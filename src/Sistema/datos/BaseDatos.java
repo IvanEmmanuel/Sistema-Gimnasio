@@ -1,12 +1,14 @@
 package Sistema.datos;
 
 import Sistema.pojos.Membresias;
+import Sistema.pojos.MiembroBusqueda;
 import Sistema.pojos.Miembros;
 import Sistema.pojos.Pagos;
 import Sistema.pojos.TiposMembresia;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -25,7 +27,8 @@ import java.util.logging.Logger;
 public class BaseDatos {
     
     Connection conn = null;
-    PreparedStatement st = null;
+    PreparedStatement prepSt = null;
+    Statement st = null;
     ResultSet rs = null;
     
     public BaseDatos(){
@@ -48,25 +51,26 @@ public class BaseDatos {
             File fileFoto = miembro.getFotoMiembro();
             FileInputStream fis = new FileInputStream(fileFoto);
             
-            String sql = "INSERT INTO miembros (nombre_miembro, apellido_paterno_miembro, "
-                    + "apellido_materno_miembro, email_miembro, telefono_miembro, direccion_miembro, "
-                    + "nacimiento_miembro, foto_miembro, fecha_inicio_miembro) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO miembros (telefono_miembro, correo_miembro, nombre_miembro, apellido_paterno_miembro, "
+                    + "apellido_materno_miembro, direccion_miembro, nacimiento_miembro, fecha_inicio_miembro, foto_miembro, estado_miembro) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             
-            st = conn.prepareStatement(sql);
-            st.setString(1, miembro.getNombre());
-            st.setString(2, miembro.getApellidoPaterno());
-            st.setString(3, miembro.getApellidoMaterno());
-            st.setString(4, miembro.getEmail());
-            st.setString(5, miembro.getTelefono());
-            st.setString(6, miembro.getDireccion());
-            st.setString(7, miembro.getFechaNacimiento());
+            prepSt = conn.prepareStatement(sql);
+            prepSt.setString(1, miembro.getTelefonoMiembro());
+            prepSt.setString(2, miembro.getEmail());
+            prepSt.setString(3, miembro.getNombre());
+            prepSt.setString(4, miembro.getApellidoPaterno());
+            prepSt.setString(5, miembro.getApellidoMaterno());
+            prepSt.setString(6, miembro.getDireccion());
+            prepSt.setString(7, miembro.getFechaNacimiento());
+            prepSt.setString(8, miembro.getFechaInicio());
             long tamanoFoto = fileFoto.length();
-            st.setBinaryStream(8, fis, tamanoFoto);
-            st.setString(9, miembro.getFechaInicio());
+            prepSt.setBinaryStream(9, fis, tamanoFoto);
+            prepSt.setBoolean(10, miembro.getEstadoMiembro());
             
             
             
-            st.executeUpdate();
+            prepSt.executeUpdate();
             
             
         } catch (SQLException ex) {
@@ -74,7 +78,50 @@ public class BaseDatos {
         }
         finally{
             try {
-                st.close();            
+                prepSt.close();            
+                conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+    
+    public void actualizarMiembro(Miembros miembro){
+        System.out.println(miembro.getNombre());
+        try {
+            
+            /*Instanciamos el objeto de la clase conexion*/
+            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
+            
+            String sql = "UPDATE miembros SET "
+           + "telefono_miembro = ?, "
+           + "correo_miembro = ?, "
+           + "nombre_miembro = ?, "
+           + "apellido_paterno_miembro = ?, "
+           + "apellido_materno_miembro = ?, "
+           + "direccion_miembro = ?, "
+           + "nacimiento_miembro = ? "
+           + "WHERE telefono_miembro = ?";
+            
+            prepSt = conn.prepareStatement(sql);
+            prepSt.setString(1, miembro.getTelefonoMiembro());
+            prepSt.setString(2, miembro.getEmail());
+            prepSt.setString(3, miembro.getNombre());
+            prepSt.setString(4, miembro.getApellidoPaterno());
+            prepSt.setString(5, miembro.getApellidoMaterno());
+            prepSt.setString(6, miembro.getDireccion());
+            prepSt.setString(7, miembro.getFechaNacimiento());
+            prepSt.setString(8, miembro.getTelefonoMiembro());
+            
+            prepSt.executeUpdate();
+            
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        finally{
+            try {
+                prepSt.close();            
                 conn.close();
             } catch (SQLException ex) {
                 ex.printStackTrace();
@@ -90,20 +137,20 @@ public class BaseDatos {
             /*Instanciamos el objeto de la clase conexion*/
             conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
             
-            String sql = "INSERT INTO membresias (id_miembro, tipo_membresia, tiempo_membresia, "
+            String sql = "INSERT INTO membresias (telefono_miembro, tipo_membresia, tiempo_membresia, "
                     + "fecha_inicio_membresia, fecha_fin_membresia, estado_membresia"
                     + ") VALUES (?, ?, ?, ?, ?, ?)";
             
-            st = conn.prepareStatement(sql);
-            st.setInt(1, membresia.getIdMiembro());
-            st.setString(2, membresia.getTipoMembresia());
-            st.setString(3, membresia.gettiempoMembresia());
-            st.setString(4, membresia.getFechaInicioMembresia());
-            st.setString(5, membresia.getFechaFinMembresia());
-            st.setString(6, membresia.getEstadoMembresia());
+            prepSt = conn.prepareStatement(sql);
+            prepSt.setString(1, membresia.getTelefonoMiembro());
+            prepSt.setString(2, membresia.getTipoMembresia());
+            prepSt.setString(3, membresia.getTiempoMembresia());
+            prepSt.setString(4, membresia.getFechaInicioMembresia());
+            prepSt.setString(5, membresia.getFechaFinMembresia());
+            prepSt.setBoolean(6, membresia.getEstadoMembresia());
             
             
-            st.executeUpdate();
+            prepSt.executeUpdate();
             
             
         } catch (SQLException ex) {
@@ -111,7 +158,7 @@ public class BaseDatos {
         }
         finally{
             try {
-                st.close();            
+                prepSt.close();            
                 conn.close();
             } catch (SQLException ex) {
                 ex.printStackTrace();
@@ -127,18 +174,19 @@ public class BaseDatos {
             /*Instanciamos el objeto de la clase conexion*/
             conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
             
-            String sql = "INSERT INTO pagos (id_membresia, monto, "
-                    + "fecha_pago, metodo_pago"
-                    + ") VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO pagos (telefono_miembro, monto, "
+                    + "fecha_pago, metodo_pago, estado_pago"
+                    + ") VALUES (?, ?, ?, ?, ?)";
             
-        st = conn.prepareStatement(sql);
-        st.setInt(1, pago.getIdMembresia());
-        st.setDouble(2, pago.getMonto());
-        st.setString(3, pago.getFechaPago());
-        st.setString(4, pago.getMetodoPago());
+        prepSt = conn.prepareStatement(sql);
+        prepSt.setString(1, pago.getTelefonoMiembro());
+        prepSt.setDouble(2, pago.getMonto());
+        prepSt.setString(3, pago.getFechaPago());
+        prepSt.setString(4, pago.getMetodoPago());
+        prepSt.setBoolean(5, pago.getEstadoPago());
             
             
-        st.executeUpdate();
+        prepSt.executeUpdate();
             
             
         } catch (SQLException ex) {
@@ -146,7 +194,7 @@ public class BaseDatos {
         }
         finally{
             try {
-                st.close();            
+                prepSt.close();            
                 conn.close();
             } catch (SQLException ex) {
                 ex.printStackTrace();
@@ -165,63 +213,13 @@ public class BaseDatos {
             String sql = "INSERT INTO tipos_membresia (id_tipo, nombre_membresia, estado) "
                     + "VALUES (?, ?, ?)";
             
-        st = conn.prepareStatement(sql);
-        st.setInt(1, tipo.getIdTipoMembresia());
-        st.setString(2, tipo.getNombreMembresia());
-        st.setInt(3, tipo.getEstadoMembresia());
+        prepSt = conn.prepareStatement(sql);
+        prepSt.setInt(1, tipo.getIdTipoMembresia());
+        prepSt.setString(2, tipo.getNombreMembresia());
+        prepSt.setInt(3, tipo.getEstadoMembresia());
             
             
-        st.executeUpdate();
-            
-            
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        finally{
-            try {
-                st.close();            
-                conn.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
-    }
-    
-    /**********      Esta clase nos permite obtener todos los registros de la tabla miembros         ***************/
-    
-    public ArrayList<Miembros> obtenerMiembro(){
-        
-        ArrayList<Miembros> listaMiembros = new ArrayList<Miembros>();
-        try {
-            
-        /*Instanciamos el objeto de la clase conexion*/
-        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
-            
-        String sql = "SELECT * FROM miembros";
-        
-        st = conn.prepareStatement(sql);
-        
-        rs = st.executeQuery();
-        
-        //id_miembro, nombre_miembro, apellido_paterno_miembro, "+ "apellido_materno_miembro, email_miembro, telefono_miembro, direccion_miembro, "+ "nacimiento_miembro, foto_miembro, fecha_inicio_miembro
-        
-        while(rs.next()){
-            int idMiembro = rs.getInt("id_miembro");
-            String nombre = rs.getString("nombre_miembro");
-            String apePaterno = rs.getString("apellido_paterno_miembro");
-            String apeMaterno = rs.getString("apellido_materno_miembro");
-            String email = rs.getString("email_miembro");
-            String telefonoMiembro = rs.getString("telefono_miembro");
-            String direccionMiembro = rs.getString("direccion_miembro");
-            String nacimientoMiembro = rs.getString("nacimiento_miembro");
-            //String foto = rs.getString("foto_miembro");
-            String fechaInicio = rs.getString("fecha_inicio_miembro");
-            
-            
-            Miembros miembro = new Miembros(idMiembro, nombre, apePaterno, apeMaterno, email, telefonoMiembro, direccionMiembro, nacimientoMiembro, fechaInicio, null);
-            listaMiembros.add(miembro);
-            
-        }
+        prepSt.executeUpdate();
             
             
         } catch (SQLException ex) {
@@ -229,15 +227,14 @@ public class BaseDatos {
         }
         finally{
             try {
-                st.close();            
+                prepSt.close();            
                 conn.close();
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
         }
-        
-        return listaMiembros;
     }
+    
     
     /**********      Esta clase nos permite obtener todos los registros de la tabla membresias         ***************/
     
@@ -251,21 +248,21 @@ public class BaseDatos {
             
         String sql = "SELECT * FROM membresias";
         
-        st = conn.prepareStatement(sql);
+        prepSt = conn.prepareStatement(sql);
         
-        rs = st.executeQuery();
+        rs = prepSt.executeQuery();
                 
         while(rs.next()){
             int idMembresia = rs.getInt("id_membresia");
-            int idMiembro = rs.getInt("id_miembro");
+            String telefonoMiembro = rs.getString("telefono_miembro");
             String tipoMembresia = rs.getString("tipo_membresia");
             String tiempoMembresia = rs.getString("tiempo_membresia");
             String fechaInicio = rs.getString("fecha_inicio_membresia");
             String fechaFin = rs.getString("fecha_fin_membresia");
-            String estadoMembresia = rs.getString("estado_membresia");
+            Boolean estadoMembresia = rs.getBoolean("estado_membresia");
             
             
-            Membresias membresia = new Membresias(idMembresia, idMiembro, tipoMembresia, tiempoMembresia, fechaInicio, fechaFin, estadoMembresia);
+            Membresias membresia = new Membresias(idMembresia, telefonoMiembro, tipoMembresia, tiempoMembresia, fechaInicio, fechaFin, estadoMembresia);
             listaMembresias.add(membresia);
             
         }
@@ -276,7 +273,7 @@ public class BaseDatos {
         }
         finally{
             try {
-                st.close();            
+                prepSt.close();            
                 conn.close();
             } catch (SQLException ex) {
                 ex.printStackTrace();
@@ -299,19 +296,20 @@ public class BaseDatos {
             
         String sql = "SELECT * FROM pagos";
         
-        st = conn.prepareStatement(sql);
+        prepSt = conn.prepareStatement(sql);
         
-        rs = st.executeQuery();
+        rs = prepSt.executeQuery();
                 
         while(rs.next()){
             int idPago = rs.getInt("id_pago");
-            int idMembresia = rs.getInt("id_membresia");
+            String telefonoMiembro = rs.getString("telefono_miembro");
             double monto = rs.getDouble("monto");
             String fechaPago = rs.getString("fecha_pago");
             String metodoPago = rs.getString("metodo_pago");
+            Boolean estadoPago = rs.getBoolean("estado_pago");
             
             
-            Pagos pago = new Pagos(idPago, idMembresia, monto, fechaPago, metodoPago);
+            Pagos pago = new Pagos(idPago, telefonoMiembro, monto, fechaPago, metodoPago, estadoPago);
             listaPagos.add(pago);
             
         }
@@ -322,7 +320,7 @@ public class BaseDatos {
         }
         finally{
             try {
-                st.close();            
+                prepSt.close();            
                 conn.close();
             } catch (SQLException ex) {
                 ex.printStackTrace();
@@ -344,9 +342,9 @@ public class BaseDatos {
             
         String sql = "SELECT * FROM tipos_membresia";
         
-        st = conn.prepareStatement(sql);
+        prepSt = conn.prepareStatement(sql);
         
-        rs = st.executeQuery();
+        rs = prepSt.executeQuery();
                 
         while(rs.next()){
             int idTiposMembresia = rs.getInt("id_tipo");
@@ -365,7 +363,7 @@ public class BaseDatos {
         }
         finally{
             try {
-                st.close();            
+                prepSt.close();            
                 conn.close();
             } catch (SQLException ex) {
                 ex.printStackTrace();
@@ -375,33 +373,223 @@ public class BaseDatos {
         return listaTiposMembresias;
     }
     
+    public ArrayList<MiembroBusqueda> obtenerMiembroBusqueda(String criterio){
+        ArrayList<MiembroBusqueda> listaBusqueda = new ArrayList<MiembroBusqueda>();
+        
+        try {
+            
+            /*Instanciamos el objeto de la clase conexion*/
+            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
+
+            String sql = "SELECT m.*, mb.* "
+                    + "FROM miembros m "
+                    + "JOIN membresias mb ON m.telefono_miembro = mb.telefono_miembro "
+                    + "WHERE m.telefono_miembro LIKE '%" + criterio + "%' "
+                    + "OR m.nombre_miembro LIKE '%" + criterio + "%' OR m.apellido_paterno_miembro LIKE '%" + criterio + "%';";
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
+
+            while(rs.next()){
+                String telefonoMiembro = rs.getString("telefono_miembro");
+                String emailMiembro = rs.getString("correo_miembro");
+                String nombreMiembro = rs.getString("nombre_miembro");
+                String apellidoPaternoMiembro = rs.getString("apellido_paterno_miembro");
+                String apellidoMaternoMiembro = rs.getString("apellido_materno_miembro");
+                String direccionMiembro = rs.getString("direccion_miembro");
+                //File fotoMiembroMiembro = rs.getFile("foto_miembro");
+                String tipoMembresiaMiembro = rs.getString("tipo_membresia");
+                String tiempoMembresia = rs.getString("tiempo_membresia");
+                String fechaFinMembresiaMiembro = rs.getString("fecha_fin_membresia");
+                Boolean estadoMembresiaMiembro = rs.getBoolean("estado_membresia");
+                Boolean estadoMiembro = rs.getBoolean("estado_miembro");
+                String fechaNacimiento = rs.getString("nacimiento_miembro");
+                
+                MiembroBusqueda miembro = new MiembroBusqueda(telefonoMiembro, emailMiembro, nombreMiembro, 
+                        apellidoPaternoMiembro, apellidoMaternoMiembro, direccionMiembro , null, tipoMembresiaMiembro,
+                        tiempoMembresia, fechaFinMembresiaMiembro, estadoMembresiaMiembro, estadoMiembro, fechaNacimiento);
+                listaBusqueda.add(miembro);
+            }
+            
+            
+        }catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        finally{
+            try {
+                st.close();            
+                conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return listaBusqueda;
+    }
+    
+    public ArrayList<MiembroBusqueda> obtenerMiembroBusqueda(){
+        ArrayList<MiembroBusqueda> listaBusqueda = new ArrayList<MiembroBusqueda>();
+        
+        try {
+            
+            /*Instanciamos el objeto de la clase conexion*/
+            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
+
+            String sql = "SELECT m.*, mb.* "
+                    + "FROM miembros m "
+                    + "LEFT JOIN membresias mb ON m.telefono_miembro = mb.telefono_miembro order by m.telefono_miembro;";
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
+
+            while(rs.next()){
+                String telefonoMiembro = rs.getString("telefono_miembro");
+                String emailMiembro = rs.getString("correo_miembro");
+                String nombreMiembro = rs.getString("nombre_miembro");
+                String apellidoPaternoMiembro = rs.getString("apellido_paterno_miembro");
+                String apellidoMaternoMiembro = rs.getString("apellido_materno_miembro");
+                String direccionMiembro = rs.getString("direccion_miembro");
+                //File fotoMiembroMiembro = rs.getFile("foto_miembro");
+                String tipoMembresiaMiembro = rs.getString("tipo_membresia");
+                String tiempoMembresia = rs.getString("tiempo_membresia");
+                String fechaFinMembresiaMiembro = rs.getString("fecha_fin_membresia");
+                Boolean estadoMembresiaMiembro = rs.getBoolean("estado_membresia");
+                Boolean estadoMiembro = rs.getBoolean("estado_miembro");
+                String fechaNacimiento = rs.getString("nacimiento_miembro");
+                
+                MiembroBusqueda miembro = new MiembroBusqueda(telefonoMiembro, emailMiembro, nombreMiembro, 
+                        apellidoPaternoMiembro, apellidoMaternoMiembro, direccionMiembro , null, tipoMembresiaMiembro,
+                        tiempoMembresia, fechaFinMembresiaMiembro, estadoMembresiaMiembro, estadoMiembro, fechaNacimiento);
+                listaBusqueda.add(miembro);
+            }
+            
+            
+        }catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        finally{
+            try {
+                st.close();            
+                conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return listaBusqueda;
+    }
+    
+    public void borarMiembro(MiembroBusqueda miembro){
+    try {
+            
+            /*Instanciamos el objeto de la clase conexion*/
+            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
+            
+            String sql = "UPDATE miembros SET estado_miembro = ? WHERE telefono_miembro=?";
+            
+            prepSt = conn.prepareStatement(sql);
+            prepSt.setBoolean(1, false);
+            prepSt.setString(2,miembro.getTelefonoMiembro());
+            
+            prepSt.executeUpdate();
+            
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        finally{
+            try {
+                prepSt.close();            
+                conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+    
+    public InputStream buscarFoto(MiembroBusqueda miembro){
+        InputStream streamFoto = null;
+        
+        try{
+            /*Instanciamos el objeto de la clase conexion*/
+            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
+            
+            String sql = "SELECT foto_miembro from miembros WHERE telefono_miembro = ?";
+            
+            prepSt = conn.prepareStatement(sql);
+            prepSt.setString(1, miembro.getTelefonoMiembro());
+            
+            rs = prepSt.executeQuery();
+            
+            while(rs.next()){
+                streamFoto = rs.getBinaryStream("foto_miembro");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        finally{
+            try {
+                prepSt.close();            
+                conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return streamFoto;
+    }
+    
+    
+    
     
 }
 
 
-/*Query para traer todos los datos de una BD*/
+/**********      Esta clase nos permite obtener todos los registros de la tabla miembros         ***************/
+    /*
+    public ArrayList<Miembros> obtenerMiembro(){
+        
+        ArrayList<Miembros> listaMiembros = new ArrayList<Miembros>();
+        try {
             
-            //rs = st.executeQuery("SELECT * FROM \"miembros\"");
-            /*
-            while(rs.next()){
-                int id = rs.getInt(1);
-                String nombre = rs.getString(2);
-                String ape_paterno = rs.getString(3);
-                String email = rs.getString(4);
-                String tel = rs.getString(5);
-                String direc = rs.getString(6);
-                String fecha_nac = rs.getString(7);
-                String fecha_inicio = rs.getString(8);
-                String ape_materno = rs.getString(10);
-                
-                System.out.println("Id: " + id);
-                System.out.println("Nombre: " + nombre);
-                System.out.println("Apellido Paterno: " + ape_paterno);
-                System.out.println("Apellido Materno: " + ape_materno);
-                System.out.println("Email: " + email);
-                System.out.println("Telefono: " + tel);
-                System.out.println("Direccion: " + direc);
-                System.out.println("Fecha de Nacimiento: " + fecha_nac);
-                System.out.println("Miembro Desde: " + fecha_inicio);
+       
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
+            
+        String sql = "SELECT * FROM miembros";
+        
+        prepSt = conn.prepareStatement(sql);
+        
+        rs = prepSt.executeQuery();
+        
+        
+        while(rs.next()){
+            String telefono_miembro = rs.getString("telefono_miembro");
+            String email = rs.getString("correo_miembro");
+            String nombre = rs.getString("nombre_miembro");
+            String apePaterno = rs.getString("apellido_paterno_miembro");
+            String apeMaterno = rs.getString("apellido_materno_miembro");
+            String direccionMiembro = rs.getString("direccion_miembro");
+            String nacimientoMiembro = rs.getString("nacimiento_miembro");
+            String fechaInicio = rs.getString("fecha_inicio_miembro");
+            String foto = rs.getString("foto_miembro");
+            Boolean estadoMiembro = rs.getBoolean("estado_miembro");
+            
+            
+            Miembros miembro = new Miembros(telefono_miembro, email, nombre, apePaterno, apeMaterno, direccionMiembro, nacimientoMiembro, fechaInicio, null, estadoMiembro);
+            listaMiembros.add(miembro);
+            
+        }
+            
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        finally{
+            try {
+                prepSt.close();            
+                conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
             }
-            */
+        }
+        
+        return listaMiembros;
+    }
+    
+    */
+

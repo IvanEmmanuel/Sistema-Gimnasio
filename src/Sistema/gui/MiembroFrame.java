@@ -1,12 +1,21 @@
 package Sistema.gui;
 
 import Sistema.datos.BaseDatos;
+import Sistema.pojos.MiembroBusqueda;
 import Sistema.pojos.Miembros;
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -16,39 +25,60 @@ public class MiembroFrame extends javax.swing.JDialog {
 
     DefaultTableModel modeloTabla = new DefaultTableModel();
     BaseDatos base = new BaseDatos();
+    MiembroBusqueda miembroSeleccionado = null;
     
     public MiembroFrame(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        cargarColumnasTabla();
         cargarModeloTabla();
+    }
+    
+    private void cargarColumnasTabla(){
+        modeloTabla.addColumn("Telefono");
+        modeloTabla.addColumn("Nombre");
+        //modeloTabla.addColumn("Dirección");
+        modeloTabla.addColumn("Tipo Membresia");
+        modeloTabla.addColumn("Fecha Proximo Pago");
+        modeloTabla.addColumn("Tiempo");
+        modeloTabla.addColumn("Estado de la Membresia");
+        modeloTabla.addColumn("Estado del Miembro");
     }
 
     /*  Este metodo carga el modelo de la tabla de miembros     */
     private void cargarModeloTabla(){
-        modeloTabla.addColumn("ID Miembro");
-        modeloTabla.addColumn("Nombre");
-        modeloTabla.addColumn("Telefono");
-        modeloTabla.addColumn("Dirección");
-        //modeloTabla.addColumn("Tipo Membresia");
-        //modeloTabla.addColumn("Fecha Proximo Pago");
-        //modeloTabla.addColumn("Estado de la Membresia");
-        
-        ArrayList<Miembros>listaMiembros = base.obtenerMiembro();
+        //ArrayList<Miembros>listaMiembros = base.obtenerMiembro();
+        ArrayList<MiembroBusqueda>listaMiembros = base.obtenerMiembroBusqueda();
         int numeroMiembros = listaMiembros.size();
         modeloTabla.setNumRows(numeroMiembros);
         
         for(int i = 0; i < numeroMiembros; i++){
-            Miembros miembro = listaMiembros.get(i);
+            MiembroBusqueda miembro = listaMiembros.get(i);
             
-            int idMiembro = miembro.getIdMiembro();
-            String telefono = miembro.getTelefono();
-            String direccion = miembro.getDireccion();
+            //String telefonoMiembro = miembro.getTelefonoMiembro();
             String nombre = miembro.getNombre() + " " + miembro.getApellidoPaterno() + " " + miembro.getApellidoMaterno(); // Concatenamos todo el nombre del Miembro
+            String tipoMembresia = miembro.getTipoMembresia();
+            String fechaProximo = miembro.getFechaFinMembresia();
+            Boolean estado = miembro.getEstadoMembresia();
+            String tiempo = miembro.getTiempoMembresia();
+            Boolean estadomiembro = miembro.getEstadoMiembro();
             
-            modeloTabla.setValueAt(idMiembro, i, 0);
-            modeloTabla.setValueAt(miembro, i, 1);
-            modeloTabla.setValueAt(telefono, i, 2);
-            modeloTabla.setValueAt(direccion, i, 3);
+            //if(miembro.getEstadoMiembro() == true){
+                modeloTabla.setValueAt(miembro, i, 0);
+                modeloTabla.setValueAt(nombre, i, 1);
+                modeloTabla.setValueAt(tipoMembresia, i, 2);
+                modeloTabla.setValueAt(fechaProximo, i, 3);
+                modeloTabla.setValueAt(tiempo, i, 4);
+                if(estado)
+                    modeloTabla.setValueAt("Activa", i, 5);
+                else
+                    modeloTabla.setValueAt("Inactiva", i, 5);
+                
+                if(estadomiembro)
+                    modeloTabla.setValueAt("Activo", i, 6);
+                else
+                    modeloTabla.setValueAt("Inactivo", i, 6);
+            //}
             
         }
     }
@@ -59,37 +89,37 @@ public class MiembroFrame extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        campoBuscar = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
         lblNombre = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        lblIdMiembro = new javax.swing.JLabel();
+        lblTelefono = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         lblTipo = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         lblEstado = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaMiembros = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
         lblFin = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        lblTelefono = new javax.swing.JLabel();
+        lblImagenMiembro = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         lblDomicilio = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        lblEstadoMiembro = new javax.swing.JLabel();
+        jToggleButton1 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jButton1.setBackground(new java.awt.Color(102, 102, 102));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 204, 0));
-        jButton1.setText("+");
+        jButton1.setText("Nuevo");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -97,22 +127,23 @@ public class MiembroFrame extends javax.swing.JDialog {
         });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setText("ID o Nombre del Miembro:");
+        jLabel2.setText("Teléfono o Nombre del Miembro:");
+
+        campoBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                campoBuscarKeyReleased(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Nombre(s): ");
 
-        jButton3.setBackground(new java.awt.Color(102, 102, 102));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 204, 0));
-        jButton3.setText("Buscar");
-
         lblNombre.setText("...");
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel7.setText("ID Miembro:");
+        jLabel7.setText("Telefono");
 
-        lblIdMiembro.setText("...");
+        lblTelefono.setText("...");
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel11.setText("Tipo de membresía:");
@@ -122,6 +153,7 @@ public class MiembroFrame extends javax.swing.JDialog {
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel15.setText("Estado de la membresía:");
 
+        lblEstado.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblEstado.setText("...");
 
         tablaMiembros.setModel(modeloTabla);
@@ -130,33 +162,75 @@ public class MiembroFrame extends javax.swing.JDialog {
                 public void valueChanged(ListSelectionEvent event){
                     if(!event.getValueIsAdjusting() && (tablaMiembros.getSelectedRow() >= 0)){
                         int filaSeleccionada = tablaMiembros.getSelectedRow();
-                        Miembros miembro = (Miembros)modeloTabla.getValueAt(filaSeleccionada, 0);
-                        String id = String.valueOf(miembro.getIdMiembro());
-                        lblIdMiembro.setText(id);
-
-                        lblNombre.setText(miembro.getNombre());
+                        ImageIcon imagenMiembro = null;
+                        MiembroBusqueda miembro = (MiembroBusqueda)modeloTabla.getValueAt(filaSeleccionada, 0);                
+                        String telefono = String.valueOf(miembro.getTelefonoMiembro());
+                        lblTelefono.setText(telefono);
+                        lblNombre.setText(miembro.getNombre() + " " + miembro.getApellidoPaterno() + " " + miembro.getApellidoMaterno());
                         lblDomicilio.setText(miembro.getDireccion());
-                        lblTelefono.setText(miembro.getTelefono());
+                        lblTipo.setText(miembro.getTipoMembresia());
+                        lblFin.setText(miembro.getFechaFinMembresia());
+
+                        if(miembro.getEstadoMembresia()){
+                            lblEstado.setText("Activa");
+                            lblEstado.setOpaque(true);
+                            lblEstado.setForeground(Color.BLACK);
+                            lblEstado.setBackground(Color.GREEN);
+                        }else{
+                            lblEstado.setOpaque(true);
+                            lblEstado.setForeground(Color.WHITE);
+                            lblEstado.setBackground(Color.RED);
+                            lblEstado.setText("Inactiva");
+                        }
+                        if(miembro.getEstadoMiembro()){
+                            lblEstadoMiembro.setText("Activo");
+                            lblEstadoMiembro.setOpaque(true);
+                            lblEstadoMiembro.setForeground(Color.BLACK);
+                            lblEstadoMiembro.setBackground(Color.GREEN);
+                        }else{
+                            lblEstadoMiembro.setText("Inactivo");
+                            lblEstadoMiembro.setOpaque(true);
+                            lblEstadoMiembro.setForeground(Color.WHITE);
+                            lblEstadoMiembro.setBackground(Color.RED);
+                        }
+                        miembroSeleccionado = miembro;
+
+                        try{
+                            /* Obtener Imagen*/
+                            InputStream is = base.buscarFoto(miembro);
+                            BufferedImage bi = ImageIO.read(is);
+                            imagenMiembro = new ImageIcon(bi);
+
+                        } catch (IOException ex){
+                            ex.printStackTrace();
+                        }
+
+                        lblImagenMiembro.setIcon(imagenMiembro);
                     }
                 }
             }
         );
         jScrollPane1.setViewportView(tablaMiembros);
 
-        jButton2.setBackground(new java.awt.Color(102, 102, 102));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 204, 204));
-        jButton2.setText("Editar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnEditar.setBackground(new java.awt.Color(102, 102, 102));
+        btnEditar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnEditar.setForeground(new java.awt.Color(0, 204, 204));
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnEditarActionPerformed(evt);
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(102, 102, 102));
-        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(204, 0, 51));
-        jButton4.setText("Eliminar");
+        btnEliminar.setBackground(new java.awt.Color(102, 102, 102));
+        btnEliminar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnEliminar.setForeground(new java.awt.Color(204, 0, 51));
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel17.setText("Fecha Proximo pago: ");
@@ -171,9 +245,9 @@ public class MiembroFrame extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("              Foto");
+        lblImagenMiembro.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblImagenMiembro.setForeground(new java.awt.Color(255, 255, 255));
+        lblImagenMiembro.setText("              Foto");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -181,143 +255,163 @@ public class MiembroFrame extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lblImagenMiembro, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lblImagenMiembro, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel5.setText("Telefono: ");
-
-        lblTelefono.setText("...");
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel9.setText("Domiciolio:");
 
         lblDomicilio.setText("...");
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel4.setText("Estado del Miembro:");
+
+        lblEstadoMiembro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblEstadoMiembro.setText("...");
+
+        jToggleButton1.setBackground(new java.awt.Color(102, 102, 102));
+        jToggleButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jToggleButton1.setForeground(new java.awt.Color(255, 102, 0));
+        jToggleButton1.setText("Salir");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(39, 39, 39)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                .addComponent(jLabel7)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(lblIdMiembro))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel11)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(lblTipo))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(jLabel17)
-                                                        .addGap(18, 18, 18))
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                        .addComponent(jLabel5)
-                                                        .addGap(80, 80, 80)))
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(lblTelefono)
-                                                    .addComponent(lblFin))))
-                                        .addGap(182, 182, 182)
+                                        .addGap(39, 39, 39)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel15)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel2)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(campoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel3)
+                                                    .addComponent(jLabel7)
+                                                    .addComponent(jLabel11)
+                                                    .addComponent(jLabel17)
                                                     .addComponent(jLabel9))
-                                                .addGap(92, 92, 92)
+                                                .addGap(36, 36, 36)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(lblDomicilio)
-                                                    .addComponent(lblEstado)
-                                                    .addComponent(lblNombre)))))))
-                            .addComponent(jLabel19)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addComponent(jLabel20)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(22, 22, 22))
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                            .addComponent(lblTelefono, javax.swing.GroupLayout.Alignment.LEADING)
+                                                            .addComponent(lblTipo)
+                                                            .addComponent(lblFin, javax.swing.GroupLayout.Alignment.LEADING))
+                                                        .addGap(164, 164, 164)
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                            .addComponent(jLabel15)
+                                                            .addComponent(jLabel3)
+                                                            .addComponent(jLabel4))
+                                                        .addGap(41, 41, 41)
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                            .addComponent(lblEstadoMiembro)
+                                                            .addComponent(lblEstado)
+                                                            .addComponent(lblNombre)))))))
+                                    .addComponent(jLabel19)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(14, 14, 14)
+                                        .addComponent(jLabel20)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 265, Short.MAX_VALUE)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(22, 22, 22))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())))
             .addGroup(layout.createSequentialGroup()
-                .addGap(282, 282, 282)
+                .addGap(156, 156, 156)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(jLabel19)
                         .addGap(15, 15, 15)
                         .addComponent(jLabel20)
-                        .addGap(29, 29, 29)
+                        .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(54, 54, 54)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(lblIdMiembro)
-                            .addComponent(jLabel3)
-                            .addComponent(lblNombre))
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel11)
-                            .addComponent(lblTipo)
-                            .addComponent(jLabel15)
-                            .addComponent(lblEstado)))
+                            .addComponent(campoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(54, 54, 54)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel3))
+                                .addGap(38, 38, 38)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel15))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(lblTelefono)
+                                            .addGap(38, 38, 38)
+                                            .addComponent(lblTipo))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(113, 113, 113)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(lblFin)
+                                                .addComponent(jLabel4)
+                                                .addComponent(lblEstadoMiembro))))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(lblNombre)
+                                        .addGap(38, 38, 38)
+                                        .addComponent(lblEstado)
+                                        .addGap(59, 59, 59))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel17)
-                            .addComponent(lblFin)
-                            .addComponent(jLabel9)
-                            .addComponent(lblDomicilio))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                        .addComponent(jLabel17)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(lblTelefono))
-                .addGap(62, 62, 62)
+                    .addComponent(jLabel9)
+                    .addComponent(lblDomicilio))
+                .addGap(46, 46, 46)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30))
+                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36))
         );
 
         pack();
@@ -331,13 +425,86 @@ public class MiembroFrame extends javax.swing.JDialog {
         nuevoMiembro.setAlwaysOnTop(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        EditarMiembroFrame editarMiembro = new EditarMiembroFrame(null,true);
-        editarMiembro.setVisible(true);
-        editarMiembro.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        editarMiembro.setLocation(600, 150);
-        editarMiembro.setAlwaysOnTop(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        String nombreMiembro = miembroSeleccionado.getNombre() + " " + miembroSeleccionado.getApellidoPaterno() + " " + miembroSeleccionado.getApellidoMaterno();
+        ImageIcon imagenMiembro = null;
+        EditarMiembroFrame frameMiem = null;
+        int opcion = JOptionPane.showConfirmDialog(this, "¿Estas Seguro de modificar el Miembro " + nombreMiembro + "?");
+        
+        if(opcion == 0){
+            try{
+                /* Obtener Imagen*/
+                InputStream is = base.buscarFoto(miembroSeleccionado);
+                BufferedImage bi = ImageIO.read(is);
+                imagenMiembro = new ImageIcon(bi);
+                
+                /*Crear Ventana de Actualizacion*/
+                frameMiem = new EditarMiembroFrame(null, true, miembroSeleccionado, imagenMiembro, "Actualizar Miembro");
+                frameMiem.setVisible(true);
+                
+            } catch (IOException ex){
+                ex.printStackTrace();
+            }
+        }
+        
+        
+       
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void campoBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoBuscarKeyReleased
+        limpiarTabla();
+        String cadenaBusqueda = campoBuscar.getText();
+        ArrayList<MiembroBusqueda> listaMiembros = base.obtenerMiembroBusqueda(cadenaBusqueda);
+        
+        int numeroMiembros = listaMiembros.size();
+        modeloTabla.setNumRows(numeroMiembros);
+        for(int i = 0; i < numeroMiembros; i++){
+            MiembroBusqueda miembro = listaMiembros.get(i);
+            String telefonoMiembro = miembro.getTelefonoMiembro();
+            String nombre = miembro.getNombre() + " " + miembro.getApellidoPaterno() + " " + miembro.getApellidoMaterno(); // Concatenamos todo el nombre del Miembro
+            String tipoMembresia = miembro.getTipoMembresia();
+            String fechaProximo = miembro.getFechaFinMembresia();
+            Boolean estado = miembro.getEstadoMembresia();
+            String tiempo = miembro.getTiempoMembresia();
+            Boolean estadoMiembro = miembro.getEstadoMiembro();
+            
+            
+            modeloTabla.setValueAt(miembro, i, 0);
+            modeloTabla.setValueAt(nombre, i, 1);
+            modeloTabla.setValueAt(tipoMembresia, i, 2);
+            modeloTabla.setValueAt(fechaProximo, i, 3);
+            modeloTabla.setValueAt(tiempo, i, 4);
+            if(estado)
+                modeloTabla.setValueAt("Activa", i, 5);
+            else
+                modeloTabla.setValueAt("Inactiva", i, 5);
+                
+            if(estadoMiembro)
+                modeloTabla.setValueAt("Activo", i, 6);
+            else
+                modeloTabla.setValueAt("Inactivo", i, 6);
+            
+        }
+    }//GEN-LAST:event_campoBuscarKeyReleased
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        Boolean miembroEstado = miembroSeleccionado.getEstadoMiembro();
+        if(miembroEstado == true){
+            int opcion = JOptionPane.showConfirmDialog(this, "¿Estas Seguro de Borar este Miembro?");
+                if(opcion == 0){
+                    base.borarMiembro(miembroSeleccionado);
+                }
+        }else
+            JOptionPane.showMessageDialog(this, "El Miembro ya esta Inactivo");
+        
+                
+        
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -381,13 +548,21 @@ public class MiembroFrame extends javax.swing.JDialog {
             }
         });
     }
+    
+    private void limpiarTabla(){
+        int numFilas = modeloTabla.getRowCount();
+        if(numFilas > 0){
+            for(int i = numFilas - 1; i >= 0; i--){
+                modeloTabla.removeRow(i);
+            }
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JTextField campoBuscar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
@@ -395,17 +570,18 @@ public class MiembroFrame extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JLabel lblDomicilio;
     private javax.swing.JLabel lblEstado;
+    private javax.swing.JLabel lblEstadoMiembro;
     private javax.swing.JLabel lblFin;
-    private javax.swing.JLabel lblIdMiembro;
+    private javax.swing.JLabel lblImagenMiembro;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblTelefono;
     private javax.swing.JLabel lblTipo;

@@ -18,8 +18,12 @@ public class MiembroBusqueda {
     private String tiempoMembresia;
     private String fechaFinMembresia;
     private Boolean estadoMembresia;
+    private Boolean estadoMiembro;
+    private String fechaNacimiento;
 
-    public MiembroBusqueda(String telefonoMiembro, String email, String nombre, String apellidoPaterno, String apellidoMaterno, String direccion, File fotoMiembro, String tipoMembresia, String tiempoMembresia, String fechaFinMembresia, Boolean estadoMembresia) {
+    public MiembroBusqueda(String telefonoMiembro, String email, String nombre, String apellidoPaterno, 
+            String apellidoMaterno, String direccion, File fotoMiembro, String tipoMembresia, String tiempoMembresia, 
+            String fechaFinMembresia, Boolean estadoMembresia, Boolean estadoMiembro, String fechaNacimiento) {
         this.telefonoMiembro = telefonoMiembro;
         this.email = email;
         this.nombre = nombre;
@@ -31,6 +35,8 @@ public class MiembroBusqueda {
         this.tiempoMembresia = tiempoMembresia;
         this.fechaFinMembresia = fechaFinMembresia;
         this.estadoMembresia = estadoMembresia;
+        this.estadoMiembro = estadoMiembro;
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     public String getTelefonoMiembro() {
@@ -121,6 +127,25 @@ public class MiembroBusqueda {
         this.estadoMembresia = estadoMembresia;
     }
     
+    public Boolean getEstadoMiembro() {
+        return estadoMiembro;
+    }
+
+    public void setEstadoMiembro(Boolean estadoMiembro) {
+        this.estadoMiembro = estadoMiembro;
+    }
     
+    public void setfechaNacimiento(String fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public String getfechaNacimiento() {
+        return fechaNacimiento;
+    }
+    
+    @Override
+    public String toString(){
+        return this.telefonoMiembro;
+    }
     
 }

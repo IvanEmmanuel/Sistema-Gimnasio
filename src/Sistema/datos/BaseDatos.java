@@ -86,8 +86,9 @@ public class BaseDatos {
         }
     }
     
+    
     public void actualizarMiembro(Miembros miembro){
-        System.out.println(miembro.getNombre());
+      
         try {
             
             /*Instanciamos el objeto de la clase conexion*/
@@ -149,6 +150,43 @@ public class BaseDatos {
             prepSt.setString(5, membresia.getFechaFinMembresia());
             prepSt.setBoolean(6, membresia.getEstadoMembresia());
             
+            
+            prepSt.executeUpdate();
+            
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        finally{
+            try {
+                prepSt.close();            
+                conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+    
+    public void actualizarMembresia(String telefono, String tipoMembresia, String tiempoMembresia, String fechaInicio, String fechaFin){
+        
+        try {
+            
+            /*Instanciamos el objeto de la clase conexion*/
+            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
+            
+            String sql = "UPDATE membresias SET "
+           + "tipo_membresia = ?, "
+           + "tiempo_membresia = ?, "
+           + "fecha_inicio_membresia = ?, "
+           + "fecha_fin_membresia = ? "
+           + "WHERE telefono_miembro = ?";
+            
+            prepSt = conn.prepareStatement(sql);
+            prepSt.setString(1, tipoMembresia);
+            prepSt.setString(2, tiempoMembresia);
+            prepSt.setString(3, fechaInicio);
+            prepSt.setString(4, fechaFin);
+            prepSt.setString(5, telefono);
             
             prepSt.executeUpdate();
             
@@ -399,6 +437,7 @@ public class BaseDatos {
                 //File fotoMiembroMiembro = rs.getFile("foto_miembro");
                 String tipoMembresiaMiembro = rs.getString("tipo_membresia");
                 String tiempoMembresia = rs.getString("tiempo_membresia");
+                String fechaInicioMembresia = rs.getString("fecha_inicio_membresia");
                 String fechaFinMembresiaMiembro = rs.getString("fecha_fin_membresia");
                 Boolean estadoMembresiaMiembro = rs.getBoolean("estado_membresia");
                 Boolean estadoMiembro = rs.getBoolean("estado_miembro");
@@ -406,7 +445,7 @@ public class BaseDatos {
                 
                 MiembroBusqueda miembro = new MiembroBusqueda(telefonoMiembro, emailMiembro, nombreMiembro, 
                         apellidoPaternoMiembro, apellidoMaternoMiembro, direccionMiembro , null, tipoMembresiaMiembro,
-                        tiempoMembresia, fechaFinMembresiaMiembro, estadoMembresiaMiembro, estadoMiembro, fechaNacimiento);
+                        tiempoMembresia, fechaInicioMembresia, fechaFinMembresiaMiembro, estadoMembresiaMiembro, estadoMiembro, fechaNacimiento);
                 listaBusqueda.add(miembro);
             }
             
@@ -424,6 +463,10 @@ public class BaseDatos {
         }
         return listaBusqueda;
     }
+    
+    
+    
+    
     
     public ArrayList<MiembroBusqueda> obtenerMiembroBusqueda(){
         ArrayList<MiembroBusqueda> listaBusqueda = new ArrayList<MiembroBusqueda>();
@@ -449,6 +492,7 @@ public class BaseDatos {
                 //File fotoMiembroMiembro = rs.getFile("foto_miembro");
                 String tipoMembresiaMiembro = rs.getString("tipo_membresia");
                 String tiempoMembresia = rs.getString("tiempo_membresia");
+                String fechaInicioMembresia = rs.getString("fecha_inicio_membresia");
                 String fechaFinMembresiaMiembro = rs.getString("fecha_fin_membresia");
                 Boolean estadoMembresiaMiembro = rs.getBoolean("estado_membresia");
                 Boolean estadoMiembro = rs.getBoolean("estado_miembro");
@@ -456,7 +500,7 @@ public class BaseDatos {
                 
                 MiembroBusqueda miembro = new MiembroBusqueda(telefonoMiembro, emailMiembro, nombreMiembro, 
                         apellidoPaternoMiembro, apellidoMaternoMiembro, direccionMiembro , null, tipoMembresiaMiembro,
-                        tiempoMembresia, fechaFinMembresiaMiembro, estadoMembresiaMiembro, estadoMiembro, fechaNacimiento);
+                        tiempoMembresia, fechaInicioMembresia, fechaFinMembresiaMiembro, estadoMembresiaMiembro, estadoMiembro, fechaNacimiento);
                 listaBusqueda.add(miembro);
             }
             

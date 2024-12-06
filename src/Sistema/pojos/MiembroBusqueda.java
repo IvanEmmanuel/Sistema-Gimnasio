@@ -16,13 +16,14 @@ public class MiembroBusqueda {
     private File fotoMiembro;
     private String tipoMembresia;
     private String tiempoMembresia;
+    private String fechaInicioMembresia;
     private String fechaFinMembresia;
     private Boolean estadoMembresia;
     private Boolean estadoMiembro;
     private String fechaNacimiento;
 
     public MiembroBusqueda(String telefonoMiembro, String email, String nombre, String apellidoPaterno, 
-            String apellidoMaterno, String direccion, File fotoMiembro, String tipoMembresia, String tiempoMembresia, 
+            String apellidoMaterno, String direccion, File fotoMiembro, String tipoMembresia, String tiempoMembresia, String fechaInicioMembresia,  
             String fechaFinMembresia, Boolean estadoMembresia, Boolean estadoMiembro, String fechaNacimiento) {
         this.telefonoMiembro = telefonoMiembro;
         this.email = email;
@@ -33,6 +34,7 @@ public class MiembroBusqueda {
         this.fotoMiembro = fotoMiembro;
         this.tipoMembresia = tipoMembresia;
         this.tiempoMembresia = tiempoMembresia;
+        this.fechaInicioMembresia = fechaInicioMembresia;
         this.fechaFinMembresia = fechaFinMembresia;
         this.estadoMembresia = estadoMembresia;
         this.estadoMiembro = estadoMiembro;
@@ -109,6 +111,14 @@ public class MiembroBusqueda {
 
     public void setTiempoMembresia(String tiempoMembresia) {
         this.tiempoMembresia = tiempoMembresia;
+    }
+    
+    public String getFechaInicioMembresia() {
+        return fechaInicioMembresia;
+    }
+
+    public void setFechaInicioMembresia(String fechaInicioMembresia) {
+        this.fechaInicioMembresia = fechaInicioMembresia;
     }
 
     public String getFechaFinMembresia() {

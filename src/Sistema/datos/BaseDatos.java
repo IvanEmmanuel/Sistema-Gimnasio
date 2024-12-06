@@ -303,6 +303,36 @@ public class BaseDatos {
         }
     }
     
+    public void insertarPuesto(String nombre){
+        try {
+            
+            /*Instanciamos el objeto de la clase conexion*/
+            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
+            
+            String sql = "INSERT INTO puestos (nombre_puesto, estado) "
+                    + "VALUES (?, ?)";
+            
+        prepSt = conn.prepareStatement(sql);
+        prepSt.setString(1, nombre);
+        prepSt.setInt(2, 1);
+            
+            
+        prepSt.executeUpdate();
+            
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        finally{
+            try {
+                prepSt.close();            
+                conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+    
     
     /**********      Esta clase nos permite obtener todos los registros de la tabla membresias         ***************/
     

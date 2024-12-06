@@ -44,6 +44,11 @@ public class ConfiguracionFrame extends javax.swing.JInternalFrame {
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jButton2.setText("Puestos Laborales");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jButton3.setText("Categoria de Equipos");
@@ -76,11 +81,18 @@ public class ConfiguracionFrame extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        TiposMembresia nuevoTipo = new TiposMembresia(null,true);
+        AltaTiposMembresia nuevoTipo = new AltaTiposMembresia(null,true);
         nuevoTipo.setVisible(true);
         nuevoTipo.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         nuevoTipo.setLocation(600, 150);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        AltaPuestos puesto = new AltaPuestos(null,true);
+        puesto.setVisible(true);
+        puesto.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        puesto.setLocation(600, 150);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

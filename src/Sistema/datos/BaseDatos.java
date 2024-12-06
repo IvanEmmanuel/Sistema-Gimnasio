@@ -273,6 +273,36 @@ public class BaseDatos {
         }
     }
     
+    public void insertarTipoMmebresia(String nombre){
+        try {
+            
+            /*Instanciamos el objeto de la clase conexion*/
+            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
+            
+            String sql = "INSERT INTO tipos_membresia (nombre_membresia, estado) "
+                    + "VALUES (?, ?)";
+            
+        prepSt = conn.prepareStatement(sql);
+        prepSt.setString(1, nombre);
+        prepSt.setInt(2, 1);
+            
+            
+        prepSt.executeUpdate();
+            
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        finally{
+            try {
+                prepSt.close();            
+                conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+    
     
     /**********      Esta clase nos permite obtener todos los registros de la tabla membresias         ***************/
     
@@ -623,58 +653,4 @@ public class BaseDatos {
     
     
 }
-
-
-/**********      Esta clase nos permite obtener todos los registros de la tabla miembros         ***************/
-    /*
-    public ArrayList<Miembros> obtenerMiembro(){
-        
-        ArrayList<Miembros> listaMiembros = new ArrayList<Miembros>();
-        try {
-            
-       
-        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
-            
-        String sql = "SELECT * FROM miembros";
-        
-        prepSt = conn.prepareStatement(sql);
-        
-        rs = prepSt.executeQuery();
-        
-        
-        while(rs.next()){
-            String telefono_miembro = rs.getString("telefono_miembro");
-            String email = rs.getString("correo_miembro");
-            String nombre = rs.getString("nombre_miembro");
-            String apePaterno = rs.getString("apellido_paterno_miembro");
-            String apeMaterno = rs.getString("apellido_materno_miembro");
-            String direccionMiembro = rs.getString("direccion_miembro");
-            String nacimientoMiembro = rs.getString("nacimiento_miembro");
-            String fechaInicio = rs.getString("fecha_inicio_miembro");
-            String foto = rs.getString("foto_miembro");
-            Boolean estadoMiembro = rs.getBoolean("estado_miembro");
-            
-            
-            Miembros miembro = new Miembros(telefono_miembro, email, nombre, apePaterno, apeMaterno, direccionMiembro, nacimientoMiembro, fechaInicio, null, estadoMiembro);
-            listaMiembros.add(miembro);
-            
-        }
-            
-            
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        finally{
-            try {
-                prepSt.close();            
-                conn.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
-        
-        return listaMiembros;
-    }
-    
-    */
 

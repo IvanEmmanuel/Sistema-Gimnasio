@@ -368,6 +368,47 @@ public class BaseDatos {
         return listaPagos;
     }
     
+    public ArrayList<Pagos> obtenerPagos(String criterio){
+        ArrayList<Pagos> listaBusqueda = new ArrayList<Pagos>();
+        
+        try {
+            
+            /*Instanciamos el objeto de la clase conexion*/
+            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
+
+            String sql = "SELECT * "
+                        + "FROM pagos "
+                        + "WHERE telefono_miembro LIKE '%" + criterio + "%' "
+                        + "ORDER BY id_pago DESC;";
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
+
+            while(rs.next()){
+                int id = rs.getInt("id_pago");
+                String telefono = rs.getString("telefono_miembro");
+                double monto = rs.getDouble("monto");
+                String fecha = rs.getString("fecha_pago");
+                String metodo = rs.getString("metodo_pago");
+                
+                Pagos pago = new Pagos(id, telefono, monto, fecha, metodo, true);
+                listaBusqueda.add(pago);
+            }
+            
+            
+        }catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        finally{
+            try {
+                st.close();            
+                conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return listaBusqueda;
+    }
+    
     /**********      Esta clase nos permite obtener todos los registros de la tabla tipos membresias        ***************/
     
     public ArrayList<TiposMembresia> obtenerTiposMembresias(){

@@ -34,7 +34,9 @@ public class ConfiguracionFrame extends javax.swing.JInternalFrame {
 
         setTitle("Administración y Configuración");
 
+        jButton1.setBackground(new java.awt.Color(102, 102, 102));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 204, 0));
         jButton1.setText("Tipos De Membresias");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -42,7 +44,9 @@ public class ConfiguracionFrame extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(102, 102, 102));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 204, 0));
         jButton2.setText("Puestos Laborales");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -50,7 +54,9 @@ public class ConfiguracionFrame extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton3.setBackground(new java.awt.Color(102, 102, 102));
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 204, 0));
         jButton3.setText("Categoria de Equipos");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

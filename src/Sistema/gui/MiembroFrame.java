@@ -495,9 +495,7 @@ public class MiembroFrame extends javax.swing.JDialog {
                     base.borarMiembro(miembroSeleccionado);
                 }
         }else
-            JOptionPane.showMessageDialog(this, "El Miembro ya esta Inactivo");
-        
-                
+            JOptionPane.showMessageDialog(this, "El Miembro ya esta Inactivo");         
         
     }//GEN-LAST:event_btnEliminarActionPerformed
 

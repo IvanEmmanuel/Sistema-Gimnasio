@@ -43,14 +43,17 @@ public class Principal extends javax.swing.JFrame {
         contenedorModulos.setLayout(contenedorModulosLayout);
         contenedorModulosLayout.setHorizontalGroup(
             contenedorModulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1109, Short.MAX_VALUE)
+            .addGap(0, 1067, Short.MAX_VALUE)
         );
         contenedorModulosLayout.setVerticalGroup(
             contenedorModulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 753, Short.MAX_VALUE)
         );
 
+        btnMembresiasPagos.setBackground(new java.awt.Color(102, 102, 102));
         GrupoModulos.add(btnMembresiasPagos);
+        btnMembresiasPagos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnMembresiasPagos.setForeground(new java.awt.Color(255, 204, 0));
         btnMembresiasPagos.setText("Membresías y Pagos");
         btnMembresiasPagos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -58,7 +61,10 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        btnReservas.setBackground(new java.awt.Color(102, 102, 102));
         GrupoModulos.add(btnReservas);
+        btnReservas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnReservas.setForeground(new java.awt.Color(255, 204, 0));
         btnReservas.setText("Clases");
         btnReservas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,7 +72,10 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        btnPersonal.setBackground(new java.awt.Color(102, 102, 102));
         GrupoModulos.add(btnPersonal);
+        btnPersonal.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnPersonal.setForeground(new java.awt.Color(255, 204, 0));
         btnPersonal.setText("Gestión de Personal");
         btnPersonal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,7 +83,10 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        btnInventarios.setBackground(new java.awt.Color(102, 102, 102));
         GrupoModulos.add(btnInventarios);
+        btnInventarios.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnInventarios.setForeground(new java.awt.Color(255, 204, 0));
         btnInventarios.setText("Inventario");
         btnInventarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,7 +94,10 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        btnReportes.setBackground(new java.awt.Color(102, 102, 102));
         GrupoModulos.add(btnReportes);
+        btnReportes.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnReportes.setForeground(new java.awt.Color(255, 204, 0));
         btnReportes.setText("Reportes y Análisis");
         btnReportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,7 +105,10 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        btnConfiguracion.setBackground(new java.awt.Color(102, 102, 102));
         GrupoModulos.add(btnConfiguracion);
+        btnConfiguracion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnConfiguracion.setForeground(new java.awt.Color(255, 204, 0));
         btnConfiguracion.setText("Administración y Configuración");
         btnConfiguracion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,6 +116,9 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jToggleButton1.setBackground(new java.awt.Color(102, 102, 102));
+        jToggleButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jToggleButton1.setForeground(new java.awt.Color(255, 51, 0));
         jToggleButton1.setText("Salir");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,7 +132,7 @@ public class Principal extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnMembresiasPagos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnReservas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnPersonal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

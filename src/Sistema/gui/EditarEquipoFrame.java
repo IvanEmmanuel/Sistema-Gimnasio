@@ -7,6 +7,7 @@ package Sistema.gui;
 import Sistema.datos.BaseDatos;
 import Sistema.pojos.CategoriaEquipos;
 import Sistema.pojos.Equipo;
+import java.awt.Image;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -42,7 +43,15 @@ public class EditarEquipoFrame extends javax.swing.JDialog {
     }
     
     private void cargarEquipo(Equipo equipo, ImageIcon icon){
-        lblFoto1.setIcon(icon);
+        
+        int anchoImagen = lblFoto1.getWidth();
+        int altoImagen = lblFoto1.getHeight();
+            
+        Image imagen = icon.getImage();
+        Image imagenRedimensionada = imagen.getScaledInstance(anchoImagen, altoImagen, Image.SCALE_DEFAULT);  
+        ImageIcon iconoRedimensionado = new ImageIcon(imagenRedimensionada);
+        lblFoto1.setIcon(iconoRedimensionado);
+        
         String nombre = equipo.getNombre();
         String categoria = equipo.getCategoria();
         int cantidad = equipo.getCantidad();

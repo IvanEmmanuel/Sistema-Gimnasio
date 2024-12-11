@@ -7,6 +7,7 @@ package Sistema.gui;
 import Sistema.datos.BaseDatos;
 import Sistema.pojos.Equipo;
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -152,7 +153,7 @@ public class InventarioFrame extends javax.swing.JInternalFrame {
                 public void valueChanged(ListSelectionEvent event){
                     if(!event.getValueIsAdjusting() && (tablaInventario.getSelectedRow() >= 0)){
                         int filaSeleccionada = tablaInventario.getSelectedRow();
-                        ImageIcon imagenEquipo = null;
+
                         Equipo equipo = (Equipo)modeloTabla.getValueAt(filaSeleccionada, 0);
                         lblNombre.setText(equipo.getNombre());
                         lblCategoria.setText(equipo.getCategoria());
@@ -176,19 +177,7 @@ public class InventarioFrame extends javax.swing.JInternalFrame {
                             lblEstado.setText("Inactivo");
                         }
                         equipoSeleccionado = equipo;
-
-                        try{
-                            /* Obtener Imagen*/
-                            InputStream is = base.buscarFotoInventario(equipoSeleccionado);
-                            BufferedImage bi = ImageIO.read(is);
-                            imagenEquipo = new ImageIcon(bi);
-
-                        } catch (IOException ex){
-                            ex.printStackTrace();
-                        }
-
-                        lblFoto.setIcon(imagenEquipo);
-
+                        desplegarFoto(equipo);
                     }
                 }
             }
@@ -254,11 +243,11 @@ public class InventarioFrame extends javax.swing.JInternalFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblFoto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addComponent(lblFoto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblFoto, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addComponent(lblFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         lblEstado.setText("...");
@@ -300,13 +289,11 @@ public class InventarioFrame extends javax.swing.JInternalFrame {
                                     .addComponent(lblPrecio))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel7)
-                                            .addComponent(jLabel9))
-                                        .addGap(34, 34, 34))
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel9)
                                     .addComponent(jLabel2)
-                                    .addComponent(jLabel4))))
+                                    .addComponent(jLabel4))
+                                .addGap(34, 34, 34)))
                         .addGap(1, 1, 1)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblUbicacion)
@@ -467,6 +454,28 @@ public class InventarioFrame extends javax.swing.JInternalFrame {
             }
         }
     }
+    
+    private void desplegarFoto(Equipo equipo){
+        ImageIcon imagenEquipo = null;
+        try{
+                /* Obtener Imagen*/
+            InputStream is = base.buscarFotoInventario(equipo);
+            BufferedImage bi = ImageIO.read(is);
+            imagenEquipo = new ImageIcon(bi);
+            
+            Image imgEquipo = imagenEquipo.getImage();
+            int anchoEtiqueta = lblFoto.getWidth();
+            int altoEtiqueta = lblFoto.getHeight();
+            
+            Image imgRedimensionada = imgEquipo.getScaledInstance(anchoEtiqueta, altoEtiqueta, Image.SCALE_DEFAULT);
+            
+            ImageIcon iconRedimensionado = new ImageIcon(imgRedimensionada);
+            lblFoto.setIcon(iconRedimensionado);
+            
+            } catch (IOException ex){
+                ex.printStackTrace();
+            }
+     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;

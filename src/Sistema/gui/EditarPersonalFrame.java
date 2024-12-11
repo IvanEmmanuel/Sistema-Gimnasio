@@ -7,6 +7,7 @@ package Sistema.gui;
 import Sistema.datos.BaseDatos;
 import Sistema.pojos.Personal;
 import Sistema.pojos.Roles;
+import java.awt.Image;
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -44,7 +45,14 @@ public class EditarPersonalFrame extends javax.swing.JDialog {
     }
 
     private void cargarPersona(Personal persona, ImageIcon icon){
-        lblFoto.setIcon(icon);
+        int anchoImagen = lblFoto.getWidth();
+        int altoImagen = lblFoto.getHeight();
+            
+        Image imagen = icon.getImage();
+        Image imagenRedimensionada = imagen.getScaledInstance(anchoImagen, altoImagen, Image.SCALE_DEFAULT);  
+        ImageIcon iconoRedimensionado = new ImageIcon(imagenRedimensionada);
+        lblFoto.setIcon(iconoRedimensionado);
+        
         String telefono = persona.getTelefono();
         String nombre = persona.getNombre();
         String apePaterno = persona.getApellidoPaterno();

@@ -675,9 +675,9 @@ public class NuevoMiembroFrame extends javax.swing.JDialog {
             imgMiembroFile = chooser.getSelectedFile();
             ImageIcon icono = new ImageIcon(imgMiembroFile.getAbsolutePath());
             Image imagen = icono.getImage();
-            imagen.getScaledInstance(anchoImagen, altoImagen, Image.SCALE_DEFAULT);
+            Image imagenRedimensionada = imagen.getScaledInstance(anchoImagen, altoImagen, Image.SCALE_DEFAULT);
             
-            ImageIcon iconoRedimensionado = new ImageIcon(imagen);
+            ImageIcon iconoRedimensionado = new ImageIcon(imagenRedimensionada);
             
             lblImagenMiembro.setIcon(iconoRedimensionado);
         }

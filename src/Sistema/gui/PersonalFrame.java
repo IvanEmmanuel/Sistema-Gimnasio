@@ -7,6 +7,7 @@ package Sistema.gui;
 import Sistema.datos.BaseDatos;
 import Sistema.pojos.Personal;
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -177,7 +178,6 @@ public class PersonalFrame extends javax.swing.JInternalFrame {
                 public void valueChanged(ListSelectionEvent event){
                     if(!event.getValueIsAdjusting() && (tablaPersonal.getSelectedRow() >= 0)){
                         int filaSeleccionada = tablaPersonal.getSelectedRow();
-                        ImageIcon imagenPersona = null;
                         Personal persona = (Personal)modeloTabla.getValueAt(filaSeleccionada, 0);                
                         lblTelefono.setText(persona.getTelefono());
                         lblNombre.setText(persona.getNombre() + " " + persona.getApellidoPaterno() + " " + persona.getApellidoMaterno());
@@ -200,17 +200,7 @@ public class PersonalFrame extends javax.swing.JInternalFrame {
                         }
                         personaSeleccionada = persona;
 
-                        try{
-                            /* Obtener Imagen*/
-                            InputStream is = base.buscarFotoPersonal(personaSeleccionada);
-                            BufferedImage bi = ImageIO.read(is);
-                            imagenPersona = new ImageIcon(bi);
-
-                        } catch (IOException ex){
-                            ex.printStackTrace();
-                        }
-
-                        lblFoto.setIcon(imagenPersona);
+                        desplegarFoto(persona);
                     }
                 }
             }
@@ -398,6 +388,29 @@ public class PersonalFrame extends javax.swing.JInternalFrame {
             }
         }
     }
+    
+    private void desplegarFoto(Personal persona){
+        ImageIcon imagenPersona = null;
+        try{
+                /* Obtener Imagen*/
+            InputStream is = base.buscarFotoPersonal(persona);
+            BufferedImage bi = ImageIO.read(is);
+            imagenPersona = new ImageIcon(bi);
+            
+            Image imgPersona = imagenPersona.getImage();
+            int anchoEtiqueta = lblFoto.getWidth();
+            int altoEtiqueta = lblFoto.getHeight();
+            
+            Image imgRedimensionada = imgPersona.getScaledInstance(anchoEtiqueta, altoEtiqueta, Image.SCALE_DEFAULT);
+            
+            ImageIcon iconRedimensionado = new ImageIcon(imgRedimensionada);
+            lblFoto.setIcon(iconRedimensionado);
+            
+            } catch (IOException ex){
+                ex.printStackTrace();
+            }
+     }
+    
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         AltaPersonalFrame nuevoPersonal = new AltaPersonalFrame(null,true);
         nuevoPersonal.setVisible(true);

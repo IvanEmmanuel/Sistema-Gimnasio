@@ -343,9 +343,9 @@ public class AltaPersonalFrame extends javax.swing.JDialog {
             imgPersonalFile = chooser.getSelectedFile();
             ImageIcon icono = new ImageIcon(imgPersonalFile.getAbsolutePath());
             Image imagen = icono.getImage();
-            imagen.getScaledInstance(anchoImagen, altoImagen, Image.SCALE_DEFAULT);
+            Image imagenRedimensionada = imagen.getScaledInstance(anchoImagen, altoImagen, Image.SCALE_DEFAULT);
             
-            ImageIcon iconoRedimensionado = new ImageIcon(imagen);
+            ImageIcon iconoRedimensionado = new ImageIcon(imagenRedimensionada);
             
             lblFoto.setIcon(iconoRedimensionado);
         }

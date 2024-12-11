@@ -4,6 +4,7 @@ import Sistema.datos.BaseDatos;
 import Sistema.pojos.MiembroBusqueda;
 import Sistema.pojos.Miembros;
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -162,7 +163,6 @@ public class MiembroFrame extends javax.swing.JDialog {
                 public void valueChanged(ListSelectionEvent event){
                     if(!event.getValueIsAdjusting() && (tablaMiembros.getSelectedRow() >= 0)){
                         int filaSeleccionada = tablaMiembros.getSelectedRow();
-                        ImageIcon imagenMiembro = null;
                         MiembroBusqueda miembro = (MiembroBusqueda)modeloTabla.getValueAt(filaSeleccionada, 0);                
                         String telefono = String.valueOf(miembro.getTelefonoMiembro());
                         lblTelefono.setText(telefono);
@@ -194,18 +194,7 @@ public class MiembroFrame extends javax.swing.JDialog {
                             lblEstadoMiembro.setBackground(Color.RED);
                         }
                         miembroSeleccionado = miembro;
-
-                        try{
-                            /* Obtener Imagen*/
-                            InputStream is = base.buscarFoto(miembro);
-                            BufferedImage bi = ImageIO.read(is);
-                            imagenMiembro = new ImageIcon(bi);
-
-                        } catch (IOException ex){
-                            ex.printStackTrace();
-                        }
-
-                        lblImagenMiembro.setIcon(imagenMiembro);
+                        desplegarFoto(miembro);
                     }
                 }
             }
@@ -556,6 +545,30 @@ public class MiembroFrame extends javax.swing.JDialog {
                 dialog.setVisible(true);
             }
         });
+    }
+    
+    private void desplegarFoto(MiembroBusqueda miembro){
+        ImageIcon imagenMiembro = null;
+        try{
+                /* Obtener Imagen*/
+            InputStream is = base.buscarFoto(miembro);
+            BufferedImage bi = ImageIO.read(is);
+            imagenMiembro = new ImageIcon(bi);
+            
+            
+            Image imgMiembro = imagenMiembro.getImage();
+            int anchoEtiqueta = lblImagenMiembro.getWidth();
+            int altoEtiqueta = lblImagenMiembro.getHeight();
+            
+            Image imgRedimensionada = imgMiembro.getScaledInstance(anchoEtiqueta, altoEtiqueta, Image.SCALE_DEFAULT);
+            
+            ImageIcon iconRedimensionado = new ImageIcon(imgRedimensionada);
+            lblImagenMiembro.setIcon(iconRedimensionado);
+            
+            } catch (IOException ex){
+                    ex.printStackTrace();
+            }
+    
     }
     
     private void limpiarTabla(){

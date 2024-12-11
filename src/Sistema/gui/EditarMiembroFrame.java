@@ -7,6 +7,7 @@ package Sistema.gui;
 import Sistema.datos.BaseDatos;
 import Sistema.pojos.MiembroBusqueda;
 import Sistema.pojos.Miembros;
+import java.awt.Image;
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -33,7 +34,14 @@ public class EditarMiembroFrame extends javax.swing.JDialog {
     }
 
     private void cargarMiembro(MiembroBusqueda miembro, ImageIcon icon){
-        lblImagenMiembro.setIcon(icon);
+        
+        int anchoImagen = lblImagenMiembro.getWidth();
+        int altoImagen = lblImagenMiembro.getHeight();
+            
+        Image imagen = icon.getImage();
+        Image imagenRedimensionada = imagen.getScaledInstance(anchoImagen, altoImagen, Image.SCALE_DEFAULT);  
+        ImageIcon iconoRedimensionado = new ImageIcon(imagenRedimensionada);
+        lblImagenMiembro.setIcon(iconoRedimensionado);
         String telefono = miembro.getTelefonoMiembro();
         String nombre = miembro.getNombre();
         String apePaterno = miembro.getApellidoPaterno();

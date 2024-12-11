@@ -1,5 +1,7 @@
 package Sistema.datos;
 
+import Sistema.pojos.CategoriaEquipos;
+import Sistema.pojos.Equipo;
 import Sistema.pojos.Membresias;
 import Sistema.pojos.MiembroBusqueda;
 import Sistema.pojos.Miembros;
@@ -137,6 +139,49 @@ public class BaseDatos {
         }
     }
     
+    public void insertarEquipo(Equipo equipo) throws FileNotFoundException{
+        try {
+            /*Instanciamos el objeto de la clase conexion*/
+            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
+            
+            File fileFoto = equipo.getFoto();
+            FileInputStream fis = new FileInputStream(fileFoto);
+            
+            String sql = "INSERT INTO inventario (nombre, categoria, "
+                    + "cantidad, precio_compra, condicion, ubicacion, fecha_compra, "
+                    + "foto, estado) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            
+            prepSt = conn.prepareStatement(sql);
+            prepSt.setString(1, equipo.getNombre());
+            prepSt.setString(2, equipo.getCategoria());
+            prepSt.setInt(3, equipo.getCantidad());
+            prepSt.setDouble(4, equipo.getPrecio());
+            prepSt.setString(5, equipo.getCondicion());
+            prepSt.setString(6, equipo.getUbicacion());
+            prepSt.setString(7, equipo.getFechaCompra());
+            long tamanoFoto = fileFoto.length();
+            prepSt.setBinaryStream(8, fis, tamanoFoto);
+            prepSt.setBoolean(9, equipo.getEstado());
+            
+            
+            
+            prepSt.executeUpdate();
+            
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        finally{
+            try {
+                prepSt.close();            
+                conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+    
     
     public void actualizarMiembro(Miembros miembro){
       
@@ -217,6 +262,49 @@ public class BaseDatos {
            prepSt.setString(11, persona.getHorario());
            prepSt.setString(12, persona.getDias());
            prepSt.setString(13, persona.getTelefono());
+            
+            prepSt.executeUpdate();
+            
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        finally{
+            try {
+                prepSt.close();            
+                conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+    
+    public void actualizarInventario(Equipo equipo){
+      
+        try {
+            
+            /*Instanciamos el objeto de la clase conexion*/
+            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
+            
+            String sql = "UPDATE inventario SET "
+           + "nombre = ?, "
+           + "categoria = ?, "
+           + "cantidad = ?, "
+           + "precio_compra = ?, "
+           + "condicion = ?, "
+           + "ubicacion = ?, "
+           + "estado = ? "
+           + "WHERE nombre = ?";
+            
+           prepSt = conn.prepareStatement(sql);
+           prepSt.setString(1, equipo.getNombre());
+           prepSt.setString(2, equipo.getCategoria());
+           prepSt.setInt(3, equipo.getCantidad());
+           prepSt.setDouble(4, equipo.getPrecio());
+           prepSt.setString(5, equipo.getCondicion());
+           prepSt.setString(6, equipo.getUbicacion());
+           prepSt.setBoolean(7, equipo.getEstado());
+           prepSt.setString(8, equipo.getNombre());
             
             prepSt.executeUpdate();
             
@@ -688,6 +776,47 @@ public class BaseDatos {
         return listaRoles;
     }
     
+    public ArrayList<CategoriaEquipos> obtenerCategorias(){
+        
+        ArrayList<CategoriaEquipos> listaCategorias = new ArrayList<CategoriaEquipos>();
+        try {
+            
+        /*Instanciamos el objeto de la clase conexion*/
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
+            
+        String sql = "SELECT * FROM categoria_equipos";
+        
+        prepSt = conn.prepareStatement(sql);
+        
+        rs = prepSt.executeQuery();
+                
+        while(rs.next()){
+            int idCategoria = rs.getInt("id_categoria");
+            String nombre = rs.getString("nombre");
+            boolean estado = rs.getBoolean("estado");
+            
+            
+            CategoriaEquipos categoria = new CategoriaEquipos(idCategoria, nombre, estado);
+            listaCategorias.add(categoria);
+            
+        }
+            
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        finally{
+            try {
+                prepSt.close();            
+                conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        
+        return listaCategorias;
+    }
+    
     public ArrayList<MiembroBusqueda> obtenerMiembroBusqueda(String criterio){
         ArrayList<MiembroBusqueda> listaBusqueda = new ArrayList<MiembroBusqueda>();
         
@@ -845,6 +974,98 @@ public class BaseDatos {
         return listaPrsonal;
     }
     
+    public ArrayList<Equipo> obtenerInventario(){
+        
+        ArrayList<Equipo> listaInventario = new ArrayList<Equipo>();
+        try {
+            
+        /*Instanciamos el objeto de la clase conexion*/
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
+            
+        String sql = "SELECT * FROM inventario";
+        
+        prepSt = conn.prepareStatement(sql);
+        
+        rs = prepSt.executeQuery();
+                
+        while(rs.next()){
+            int idEquipo = rs.getInt("id_equipo");
+            String nombre = rs.getString("nombre");
+            String categoria = rs.getString("categoria");
+            int cantidad = rs.getInt("cantidad");
+            double precio = rs.getDouble("precio_compra");
+            String condicion = rs.getString("condicion");
+            String ubicacion = rs.getString("ubicacion");
+            String fecha = rs.getString("fecha_compra");
+            Boolean estado = rs.getBoolean("estado");
+                        
+            Equipo equipo = new Equipo(idEquipo, nombre, categoria, cantidad, precio, condicion, ubicacion, fecha, null, estado);
+            listaInventario.add(equipo);
+            
+            
+        }
+            
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        finally{
+            try {
+                prepSt.close();            
+                conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        
+        return listaInventario;
+    }
+    
+    public ArrayList<Equipo> obtenerInventario(String criterio){
+        ArrayList<Equipo> listaBusqueda = new ArrayList<Equipo>();
+        
+        try {
+            
+            /*Instanciamos el objeto de la clase conexion*/
+            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
+
+            String sql = "SELECT * "
+                        + "FROM inventario "
+                        + "WHERE nombre LIKE '%" + criterio + "%' OR condicion LIKE '%" + criterio + "%' OR ubicacion LIKE '%" + criterio + "%'"
+                        + "ORDER BY id_equipo DESC;";
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
+
+            while(rs.next()){
+                int idEquipo = rs.getInt("id_equipo");
+                String nombre = rs.getString("nombre");
+                String categoria = rs.getString("categoria");
+                int cantidad = rs.getInt("cantidad");
+                double precio = rs.getDouble("precio_compra");
+                String condicion = rs.getString("condicion");
+                String ubicacion = rs.getString("ubicacion");
+                String fecha = rs.getString("fecha_compra");
+                Boolean estado = rs.getBoolean("estado");
+                        
+                Equipo equipo = new Equipo(idEquipo, nombre, categoria, cantidad, precio, condicion, ubicacion, fecha, null, estado);
+                listaBusqueda.add(equipo);
+            }
+            
+            
+        }catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        finally{
+            try {
+                st.close();            
+                conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return listaBusqueda;
+    }
+    
     public ArrayList<Personal> obtenerPersonal(String criterio){
         ArrayList<Personal> listaBusqueda = new ArrayList<Personal>();
         
@@ -950,6 +1171,34 @@ public class BaseDatos {
         }
     }
     
+    public void borarEquipo(Equipo equipo){
+    try {
+            
+            /*Instanciamos el objeto de la clase conexion*/
+            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
+            
+            String sql = "UPDATE inventario SET estado = ? WHERE nombre=?";
+            
+            prepSt = conn.prepareStatement(sql);
+            prepSt.setBoolean(1, false);
+            prepSt.setString(2,equipo.getNombre());
+            
+            prepSt.executeUpdate();
+            
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        finally{
+            try {
+                prepSt.close();            
+                conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+    
     public InputStream buscarFoto(MiembroBusqueda miembro){
         InputStream streamFoto = null;
         
@@ -1012,7 +1261,36 @@ public class BaseDatos {
         return streamFoto;
     }
     
-    
+    public InputStream buscarFotoInventario(Equipo equipo){
+        InputStream streamFoto = null;
+        
+        try{
+            /*Instanciamos el objeto de la clase conexion*/
+            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
+            
+            String sql = "SELECT foto from inventario WHERE nombre = ?";
+            
+            prepSt = conn.prepareStatement(sql);
+            prepSt.setString(1, equipo.getNombre());
+            
+            rs = prepSt.executeQuery();
+            
+            while(rs.next()){
+                streamFoto = rs.getBinaryStream("foto");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        finally{
+            try {
+                prepSt.close();            
+                conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return streamFoto;
+    }
     
     
     

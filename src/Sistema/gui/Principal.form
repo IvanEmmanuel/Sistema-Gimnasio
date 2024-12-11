@@ -77,7 +77,6 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Component id="btnMembresiasPagos" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btnReservas" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnPersonal" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnInventarios" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnReportes" alignment="0" max="32767" attributes="0"/>
@@ -93,17 +92,15 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                   <Component id="btnMembresiasPagos" min="-2" pref="45" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="btnReservas" min="-2" pref="45" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnPersonal" min="-2" pref="45" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnInventarios" min="-2" pref="45" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnReportes" min="-2" pref="45" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnConfiguracion" min="-2" pref="45" max="-2" attributes="0"/>
-                  <EmptySpace pref="149" max="32767" attributes="0"/>
+                  <EmptySpace pref="182" max="32767" attributes="0"/>
                   <Component id="jToggleButton1" min="-2" pref="44" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
               </Group>
@@ -129,26 +126,6 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMembresiasPagosActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JToggleButton" name="btnReservas">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="66" green="66" red="66" type="rgb"/>
-            </Property>
-            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-              <ComponentRef name="GrupoModulos"/>
-            </Property>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="14" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="cc" red="ff" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Clases"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReservasActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JToggleButton" name="btnPersonal">

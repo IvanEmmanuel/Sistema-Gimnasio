@@ -171,6 +171,7 @@ public class PersonalFrame extends javax.swing.JInternalFrame {
 
         lblEstado.setText("...");
 
+        tablaPersonal.setModel(modeloTabla);
         tablaPersonal.getSelectionModel().addListSelectionListener(
             new ListSelectionListener() {
                 public void valueChanged(ListSelectionEvent event){
@@ -214,7 +215,6 @@ public class PersonalFrame extends javax.swing.JInternalFrame {
                 }
             }
         );
-        tablaPersonal.setModel(modeloTabla);
         jScrollPane1.setViewportView(tablaPersonal);
 
         btnEditar.setBackground(new java.awt.Color(102, 102, 102));
@@ -241,17 +241,17 @@ public class PersonalFrame extends javax.swing.JInternalFrame {
 
         lblFoto.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblFoto.setForeground(new java.awt.Color(255, 255, 255));
-        lblFoto.setText("                 FOTO");
+        lblFoto.setText("                 ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblFoto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addComponent(lblFoto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblFoto, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addComponent(lblFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         btnActualizar.setBackground(new java.awt.Color(102, 102, 102));
@@ -323,7 +323,7 @@ public class PersonalFrame extends javax.swing.JInternalFrame {
                                     .addComponent(lblFecha))))
                         .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(14, Short.MAX_VALUE))))
+                        .addContainerGap(16, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -406,9 +406,19 @@ public class PersonalFrame extends javax.swing.JInternalFrame {
         nuevoPersonal.setAlwaysOnTop(true);
     }//GEN-LAST:event_btnNuevoActionPerformed
 
+    public static String capitalizeFirstLetter(String input) {
+        if (input == null || input.isEmpty()) {
+            return input; // Retorna la cadena tal cual si está vacía o es nula
+        }
+        
+        // Convierte la primera letra a mayúscula y concatena con el resto de la cadena
+        return input.substring(0, 1).toUpperCase() + input.substring(1);
+    }
+    
     private void campoBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoBuscarKeyReleased
         limpiarTabla();
-        String cadenaBusqueda = campoBuscar.getText();
+        String cadena = campoBuscar.getText();
+        String cadenaBusqueda = capitalizeFirstLetter(cadena);
         ArrayList<Personal> listaPersonal = base.obtenerPersonal(cadenaBusqueda);
         
         int numeroPersonas = listaPersonal.size();
@@ -434,7 +444,7 @@ public class PersonalFrame extends javax.swing.JInternalFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         Boolean estado = personaSeleccionada.getEstado();
         if(estado == true){
-            int opcion = JOptionPane.showConfirmDialog(this, "¿Estas Seguro de Borar este Miembro?");
+            int opcion = JOptionPane.showConfirmDialog(this, "¿Estas Seguro de Borar este Registro?");
                 if(opcion == 0){
                     base.borarPersonal(personaSeleccionada);
                 }
@@ -456,7 +466,7 @@ public class PersonalFrame extends javax.swing.JInternalFrame {
                 imagenPersona = new ImageIcon(bi);
                 
                 /*Crear Ventana de Actualizacion*/
-                framePersona = new EditarPersonalFrame(null, true, personaSeleccionada, imagenPersona, "Actualizar Miembro");
+                framePersona = new EditarPersonalFrame(null, true, personaSeleccionada, imagenPersona, "Actualizar Personal");
                 framePersona.setVisible(true);
                 
             } catch (IOException ex){

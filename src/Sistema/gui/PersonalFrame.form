@@ -97,7 +97,7 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="14" max="32767" attributes="0"/>
+                      <EmptySpace pref="16" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -339,7 +339,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="tablaPersonal.getSelectionModel().addListSelectionListener(&#xd;&#xa;    new ListSelectionListener() {&#xd;&#xa;        public void valueChanged(ListSelectionEvent event){&#xd;&#xa;            if(!event.getValueIsAdjusting() &amp;&amp; (tablaPersonal.getSelectedRow() &gt;= 0)){&#xd;&#xa;                int filaSeleccionada = tablaPersonal.getSelectedRow();&#xd;&#xa;                ImageIcon imagenPersona = null;&#xd;&#xa;                Personal persona = (Personal)modeloTabla.getValueAt(filaSeleccionada, 0);                &#xd;&#xa;                lblTelefono.setText(persona.getTelefono());&#xd;&#xa;                lblNombre.setText(persona.getNombre() + &quot; &quot; + persona.getApellidoPaterno() + &quot; &quot; + persona.getApellidoMaterno());&#xd;&#xa;                lblRol.setText(persona.getPuesto());&#xd;&#xa;                lblFecha.setText(persona.getFechaContratacion());&#xd;&#xa;                lblHorario.setText(persona.getHorario());&#xd;&#xa;                lblSalario.setText(persona.getSalario());&#xd;&#xa;                lblCorreo.setText(persona.getCorreo());&#xd;&#xa;                lblDescanso.setText(persona.getDias());&#xd;&#xa;                if(persona.getEstado()){&#xd;&#xa;                    lblEstado.setText(&quot;Activo&quot;);&#xd;&#xa;                    lblEstado.setOpaque(true);&#xd;&#xa;                    lblEstado.setForeground(Color.BLACK);&#xd;&#xa;                    lblEstado.setBackground(Color.GREEN);&#xd;&#xa;                }else{&#xd;&#xa;                    lblEstado.setOpaque(true);&#xd;&#xa;                    lblEstado.setForeground(Color.WHITE);&#xd;&#xa;                    lblEstado.setBackground(Color.RED);&#xd;&#xa;                    lblEstado.setText(&quot;Inactivo&quot;);&#xd;&#xa;                }&#xd;&#xa;                personaSeleccionada = persona;&#xd;&#xa;&#xd;&#xa;                try{&#xd;&#xa;                /* Obtener Imagen*/&#xd;&#xa;                InputStream is = base.buscarFotoPersonal(personaSeleccionada);&#xd;&#xa;                BufferedImage bi = ImageIO.read(is);&#xd;&#xa;                imagenPersona = new ImageIcon(bi);&#xd;&#xa;                &#xd;&#xa;                &#xd;&#xa;                } catch (IOException ex){&#xd;&#xa;                    ex.printStackTrace();&#xd;&#xa;                }&#xd;&#xa;&#xd;&#xa;                lblFoto.setIcon(imagenPersona);&#xd;&#xa;            }&#xd;&#xa;        }&#xd;&#xa;    }&#xd;&#xa;);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="tablaPersonal.getSelectionModel().addListSelectionListener(&#xd;&#xa;    new ListSelectionListener() {&#xd;&#xa;        public void valueChanged(ListSelectionEvent event){&#xd;&#xa;            if(!event.getValueIsAdjusting() &amp;&amp; (tablaPersonal.getSelectedRow() &gt;= 0)){&#xd;&#xa;                int filaSeleccionada = tablaPersonal.getSelectedRow();&#xd;&#xa;                ImageIcon imagenPersona = null;&#xd;&#xa;                Personal persona = (Personal)modeloTabla.getValueAt(filaSeleccionada, 0);                &#xd;&#xa;                lblTelefono.setText(persona.getTelefono());&#xd;&#xa;                lblNombre.setText(persona.getNombre() + &quot; &quot; + persona.getApellidoPaterno() + &quot; &quot; + persona.getApellidoMaterno());&#xd;&#xa;                lblRol.setText(persona.getPuesto());&#xd;&#xa;                lblFecha.setText(persona.getFechaContratacion());&#xd;&#xa;                lblHorario.setText(persona.getHorario());&#xd;&#xa;                lblSalario.setText(persona.getSalario());&#xd;&#xa;                lblCorreo.setText(persona.getCorreo());&#xd;&#xa;                lblDescanso.setText(persona.getDias());&#xd;&#xa;                if(persona.getEstado()){&#xd;&#xa;                    lblEstado.setText(&quot;Activo&quot;);&#xd;&#xa;                    lblEstado.setOpaque(true);&#xd;&#xa;                    lblEstado.setForeground(Color.BLACK);&#xd;&#xa;                    lblEstado.setBackground(Color.GREEN);&#xd;&#xa;                }else{&#xd;&#xa;                    lblEstado.setOpaque(true);&#xd;&#xa;                    lblEstado.setForeground(Color.WHITE);&#xd;&#xa;                    lblEstado.setBackground(Color.RED);&#xd;&#xa;                    lblEstado.setText(&quot;Inactivo&quot;);&#xd;&#xa;                }&#xd;&#xa;                personaSeleccionada = persona;&#xd;&#xa;&#xd;&#xa;                try{&#xd;&#xa;                /* Obtener Imagen*/&#xd;&#xa;                InputStream is = base.buscarFotoPersonal(personaSeleccionada);&#xd;&#xa;                BufferedImage bi = ImageIO.read(is);&#xd;&#xa;                imagenPersona = new ImageIcon(bi);&#xd;&#xa;                &#xd;&#xa;                &#xd;&#xa;                } catch (IOException ex){&#xd;&#xa;                    ex.printStackTrace();&#xd;&#xa;                }&#xd;&#xa;&#xd;&#xa;                lblFoto.setIcon(imagenPersona);&#xd;&#xa;            }&#xd;&#xa;        }&#xd;&#xa;    }&#xd;&#xa;);"/>
           </AuxValues>
         </Component>
       </SubComponents>
@@ -388,12 +388,12 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="lblFoto" alignment="1" pref="300" max="32767" attributes="0"/>
+              <Component id="lblFoto" alignment="1" min="-2" pref="300" max="-2" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="lblFoto" alignment="0" pref="300" max="32767" attributes="0"/>
+              <Component id="lblFoto" alignment="0" min="-2" pref="300" max="-2" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -406,7 +406,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="                 FOTO"/>
+            <Property name="text" type="java.lang.String" value="                 "/>
           </Properties>
         </Component>
       </SubComponents>

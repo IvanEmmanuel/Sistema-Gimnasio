@@ -245,9 +245,10 @@ public class MiembroFrame extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
 
+        lblImagenMiembro.setBackground(new java.awt.Color(102, 102, 102));
         lblImagenMiembro.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblImagenMiembro.setForeground(new java.awt.Color(255, 255, 255));
-        lblImagenMiembro.setText("              Foto");
+        lblImagenMiembro.setText("            ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -451,9 +452,19 @@ public class MiembroFrame extends javax.swing.JDialog {
        
     }//GEN-LAST:event_btnEditarActionPerformed
 
+    public static String capitalizeFirstLetter(String input) {
+        if (input == null || input.isEmpty()) {
+            return input; // Retorna la cadena tal cual si está vacía o es nula
+        }
+        
+        // Convierte la primera letra a mayúscula y concatena con el resto de la cadena
+        return input.substring(0, 1).toUpperCase() + input.substring(1);
+    }
+    
     private void campoBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoBuscarKeyReleased
         limpiarTabla();
-        String cadenaBusqueda = campoBuscar.getText();
+        String cadena = campoBuscar.getText();
+        String cadenaBusqueda = capitalizeFirstLetter(cadena);
         ArrayList<MiembroBusqueda> listaMiembros = base.obtenerMiembroBusqueda(cadenaBusqueda);
         
         int numeroMiembros = listaMiembros.size();

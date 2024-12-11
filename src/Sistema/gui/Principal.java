@@ -30,7 +30,6 @@ public class Principal extends javax.swing.JFrame {
         contenedorModulos = new javax.swing.JDesktopPane();
         jPanel1 = new javax.swing.JPanel();
         btnMembresiasPagos = new javax.swing.JToggleButton();
-        btnReservas = new javax.swing.JToggleButton();
         btnPersonal = new javax.swing.JToggleButton();
         btnInventarios = new javax.swing.JToggleButton();
         btnReportes = new javax.swing.JToggleButton();
@@ -58,17 +57,6 @@ public class Principal extends javax.swing.JFrame {
         btnMembresiasPagos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMembresiasPagosActionPerformed(evt);
-            }
-        });
-
-        btnReservas.setBackground(new java.awt.Color(102, 102, 102));
-        GrupoModulos.add(btnReservas);
-        btnReservas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnReservas.setForeground(new java.awt.Color(255, 204, 0));
-        btnReservas.setText("Clases");
-        btnReservas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReservasActionPerformed(evt);
             }
         });
 
@@ -134,7 +122,6 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnMembresiasPagos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnReservas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnPersonal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnInventarios, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnReportes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -147,17 +134,15 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(63, 63, 63)
                 .addComponent(btnMembresiasPagos, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnReservas, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnInventarios, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnConfiguracion, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
                 .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
@@ -200,19 +185,7 @@ public class Principal extends javax.swing.JFrame {
             contenedorModulos.getDesktopManager().maximizeFrame(membresia);
         }
     }//GEN-LAST:event_btnMembresiasPagosActionPerformed
-    ClasesFrame reserva;
-    private void btnReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservasActionPerformed
-        if(reserva == null){
-            reserva = new ClasesFrame();
-            contenedorModulos.add(reserva);
-            contenedorModulos.getDesktopManager().maximizeFrame(reserva);
-            reserva.setVisible(true);
-        }
-        else{
-            contenedorModulos.getDesktopManager().maximizeFrame(reserva);
-        }
-    }//GEN-LAST:event_btnReservasActionPerformed
-    PersonalFrame personal;
+        PersonalFrame personal;
     private void btnPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonalActionPerformed
         if(personal == null){
             personal = new PersonalFrame();
@@ -311,7 +284,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JToggleButton btnMembresiasPagos;
     private javax.swing.JToggleButton btnPersonal;
     private javax.swing.JToggleButton btnReportes;
-    private javax.swing.JToggleButton btnReservas;
     private javax.swing.JDesktopPane contenedorModulos;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToggleButton jToggleButton1;

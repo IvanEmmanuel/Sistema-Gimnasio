@@ -168,7 +168,6 @@ public class EditarMiembroFrame extends javax.swing.JDialog {
 
         lblImagenMiembro.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblImagenMiembro.setForeground(new java.awt.Color(255, 255, 255));
-        lblImagenMiembro.setText("        Añadir Foto");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

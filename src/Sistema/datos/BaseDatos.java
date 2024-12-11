@@ -437,6 +437,36 @@ public class BaseDatos {
         }
     }
     
+    public void insertarCategoria(String categoria){
+        try {
+            
+            /*Instanciamos el objeto de la clase conexion*/
+            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db-sistema-gimnasio", "postgres", "Blueteam");
+            
+            String sql = "INSERT INTO categoria_equipos (nombre, estado) "
+                    + "VALUES (?, ?)";
+            
+        prepSt = conn.prepareStatement(sql);
+        prepSt.setString(1, categoria);
+        prepSt.setBoolean(2, true);
+            
+            
+        prepSt.executeUpdate();
+            
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        finally{
+            try {
+                prepSt.close();            
+                conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+    
     
     /**********      Esta clase nos permite obtener todos los registros de la tabla membresias         ***************/
     

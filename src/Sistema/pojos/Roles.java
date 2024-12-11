@@ -1,9 +1,6 @@
 package Sistema.pojos;
 
-/**
- *
- * @author IVAN
- */
+
 public class Roles {
     
     private int idPuesto;

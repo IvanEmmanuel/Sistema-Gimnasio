@@ -35,6 +35,8 @@ public class PersonalFrame extends javax.swing.JInternalFrame {
         initComponents();
         cargarColumnasTabla();
         cargarModeloTabla();
+        btnEditar.setEnabled(false);
+        btnEliminar.setEnabled(false);
     }
 
     private void cargarColumnasTabla(){
@@ -201,6 +203,8 @@ public class PersonalFrame extends javax.swing.JInternalFrame {
                         personaSeleccionada = persona;
 
                         desplegarFoto(persona);
+                        btnEditar.setEnabled(true);
+                        btnEliminar.setEnabled(true);
                     }
                 }
             }
@@ -460,6 +464,21 @@ public class PersonalFrame extends javax.swing.JInternalFrame {
             int opcion = JOptionPane.showConfirmDialog(this, "¿Estas Seguro de Borar este Registro?");
                 if(opcion == 0){
                     base.borarPersonal(personaSeleccionada);
+                    JOptionPane.showMessageDialog(this, "Datos Borrados Correctamente");
+                    btnEditar.setEnabled(false);
+                    btnEliminar.setEnabled(false);
+                    campoBuscar.setText("");
+                    lblTelefono.setText("");
+                    lblNombre.setText("");
+                    lblRol.setText("");
+                    lblCorreo.setText("");
+                    lblDescanso.setText("");
+                    lblSalario.setText("");
+                    lblFecha.setText("");
+                    lblEstado.setText("");
+                    lblHorario.setText("");
+                    lblFoto.setIcon(null);
+                    cargarModeloTabla();
                 }
         }else
             JOptionPane.showMessageDialog(this, "El Miembro ya esta Inactivo");  
@@ -481,6 +500,21 @@ public class PersonalFrame extends javax.swing.JInternalFrame {
                 /*Crear Ventana de Actualizacion*/
                 framePersona = new EditarPersonalFrame(null, true, personaSeleccionada, imagenPersona, "Actualizar Personal");
                 framePersona.setVisible(true);
+                
+                btnEditar.setEnabled(false);
+                btnEliminar.setEnabled(false);
+                campoBuscar.setText("");
+                lblTelefono.setText("");
+                lblNombre.setText("");
+                lblRol.setText("");
+                lblCorreo.setText("");
+                lblDescanso.setText("");
+                lblSalario.setText("");
+                lblFecha.setText("");
+                lblEstado.setText("");
+                lblHorario.setText("");
+                lblFoto.setIcon(null);
+                cargarModeloTabla();
                 
             } catch (IOException ex){
                 ex.printStackTrace();

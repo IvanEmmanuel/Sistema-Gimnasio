@@ -101,7 +101,7 @@ public class MembresiasFrame extends javax.swing.JInternalFrame {
         MiembroFrame miembro = new MiembroFrame(null,true);
         miembro.setVisible(true);
         miembro.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        miembro.setLocation(600, 150);
+        //miembro.setLocation(600, 150);
         miembro.setAlwaysOnTop(true);
     }//GEN-LAST:event_btnMembresiaActionPerformed
 

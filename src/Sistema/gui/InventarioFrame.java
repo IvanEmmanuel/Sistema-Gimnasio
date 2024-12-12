@@ -35,6 +35,8 @@ public class InventarioFrame extends javax.swing.JInternalFrame {
         initComponents();
         cargarColumnasTabla();
         cargarModeloTabla();
+        btnEditar.setEnabled(false);
+        btnEliminar.setEnabled(false);
     }
     
     private void cargarColumnasTabla(){
@@ -178,6 +180,8 @@ public class InventarioFrame extends javax.swing.JInternalFrame {
                         }
                         equipoSeleccionado = equipo;
                         desplegarFoto(equipo);
+                        btnEditar.setEnabled(true);
+                        btnEliminar.setEnabled(true);
                     }
                 }
             }
@@ -380,6 +384,20 @@ public class InventarioFrame extends javax.swing.JInternalFrame {
                 frameEquipo = new EditarEquipoFrame(null, true, equipoSeleccionado, imagenEquipo, "Actualizar Equipo");
                 frameEquipo.setVisible(true);
                 
+                btnEditar.setEnabled(false);
+                btnEliminar.setEnabled(false);
+                campoBuscar.setText("");
+                lblNombre.setText("");
+                lblCategoria.setText("");
+                lblCantidad.setText("");
+                lblUbicacion.setText("");
+                lblFecha.setText("");
+                lblCondicion.setText("");
+                lblPrecio.setText("");
+                lblEstado.setText("");
+                lblFoto.setIcon(null);
+                cargarModeloTabla();
+                
             } catch (IOException ex){
                 ex.printStackTrace();
             }
@@ -392,9 +410,23 @@ public class InventarioFrame extends javax.swing.JInternalFrame {
             int opcion = JOptionPane.showConfirmDialog(this, "¿Estas Seguro de Borar este Registro?");
                 if(opcion == 0){
                     base.borarEquipo(equipoSeleccionado);
+                    cargarModeloTabla();
+                    JOptionPane.showMessageDialog(this, "Datos Borrados Correctamente");
+                    btnEditar.setEnabled(false);
+                    btnEliminar.setEnabled(false);
+                    campoBuscar.setText("");
+                    lblNombre.setText("");
+                    lblCategoria.setText("");
+                    lblCantidad.setText("");
+                    lblUbicacion.setText("");
+                    lblFecha.setText("");
+                    lblCondicion.setText("");
+                    lblPrecio.setText("");
+                    lblEstado.setText("");
+                    lblFoto.setIcon(null);
                 }
         }else
-            JOptionPane.showMessageDialog(this, "El Miembro ya esta Inactivo"); 
+            JOptionPane.showMessageDialog(this, "El Elemento ya esta Inactivo"); 
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed

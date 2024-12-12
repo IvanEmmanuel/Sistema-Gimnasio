@@ -32,7 +32,6 @@ public class Principal extends javax.swing.JFrame {
         btnMembresiasPagos = new javax.swing.JToggleButton();
         btnPersonal = new javax.swing.JToggleButton();
         btnInventarios = new javax.swing.JToggleButton();
-        btnReportes = new javax.swing.JToggleButton();
         btnConfiguracion = new javax.swing.JToggleButton();
         jToggleButton1 = new javax.swing.JToggleButton();
 
@@ -82,17 +81,6 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        btnReportes.setBackground(new java.awt.Color(102, 102, 102));
-        GrupoModulos.add(btnReportes);
-        btnReportes.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnReportes.setForeground(new java.awt.Color(255, 204, 0));
-        btnReportes.setText("Reportes y Análisis");
-        btnReportes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReportesActionPerformed(evt);
-            }
-        });
-
         btnConfiguracion.setBackground(new java.awt.Color(102, 102, 102));
         GrupoModulos.add(btnConfiguracion);
         btnConfiguracion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -124,7 +112,6 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(btnMembresiasPagos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnPersonal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnInventarios, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnReportes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnConfiguracion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jToggleButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -139,10 +126,8 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnInventarios, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(btnConfiguracion, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 245, Short.MAX_VALUE)
                 .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
@@ -211,19 +196,7 @@ public class Principal extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnInventariosActionPerformed
-    ReportesFrame reporte;
-    private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
-        if(reporte == null){
-            reporte = new ReportesFrame();
-            contenedorModulos.add(reporte);
-            contenedorModulos.getDesktopManager().maximizeFrame(reporte);
-            reporte.setVisible(true);
-        }
-        else{
-            contenedorModulos.getDesktopManager().maximizeFrame(reporte);
-        }
-    }//GEN-LAST:event_btnReportesActionPerformed
-    ConfiguracionFrame configuracion;
+    ReportesFrame reporte;    ConfiguracionFrame configuracion;
     private void btnConfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfiguracionActionPerformed
         if(configuracion == null){
             configuracion = new ConfiguracionFrame();
@@ -283,7 +256,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JToggleButton btnInventarios;
     private javax.swing.JToggleButton btnMembresiasPagos;
     private javax.swing.JToggleButton btnPersonal;
-    private javax.swing.JToggleButton btnReportes;
     private javax.swing.JDesktopPane contenedorModulos;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToggleButton jToggleButton1;

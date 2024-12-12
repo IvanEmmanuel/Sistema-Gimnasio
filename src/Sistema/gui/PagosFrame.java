@@ -17,6 +17,15 @@ import javax.swing.JOptionPane;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.FileOutputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  *
@@ -412,6 +421,12 @@ public class PagosFrame extends javax.swing.JDialog {
     }//GEN-LAST:event_comboTipoMembresiaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        btnPagar.setEnabled(false);
+        comboTipoMembresia.setVisible(false);
+        comboTiempo.setVisible(false);
+        lblTipoMembresia.setVisible(true);
+        lblTiempoMembresia.setVisible(true);
+        comboTipoPago.setVisible(false);
         String numero = campoNumero.getText().trim(); // Eliminar espacios en blanco
         if (!numero.isEmpty()) { // Verificar si el campo no está vacío
             try {
@@ -529,6 +544,7 @@ public class PagosFrame extends javax.swing.JDialog {
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
+
         String tiempoSeleccionado = comboTiempo.getSelectedItem().toString();
         String tipoPago = comboTipoPago.getSelectedItem().toString();
         if((tiempoSeleccionado != "- - - - - - - - - - - -") && (tipoPago != "- - - - - - - - - - - -")) {
@@ -536,6 +552,7 @@ public class PagosFrame extends javax.swing.JDialog {
             TiposMembresia tipoMembresia = (TiposMembresia)comboTipoMembresia.getSelectedItem();
             
             //Actualizamos la membresia
+            String nombre = lblNombre.getText();
             String tiempoMembresia = comboTiempo.getSelectedItem().toString();
             String fechaInicio = fechaSis.getText();
             String fechaFin = fechaTermino.getText();
@@ -553,8 +570,8 @@ public class PagosFrame extends javax.swing.JDialog {
             Pagos pago = new Pagos(0, telefono, total, fechaInicio, metodoPago, true);
             
             base.insertarPagos(pago);
-            
             JOptionPane.showMessageDialog(this, "Datos Actualizados Correctamente");
+            
             this.dispose();
         }else{
             JOptionPane.showMessageDialog(this, "No has seleccionado el tiempo o el metodo de pago de la Membresia");

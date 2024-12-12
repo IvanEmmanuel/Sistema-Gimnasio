@@ -706,7 +706,7 @@ public class NuevoMiembroFrame extends javax.swing.JDialog {
         if(imgMiembroFile == null){
             JOptionPane.showMessageDialog(this, "Debes Cargar una Fotografia");
         }
-        else{
+        else if(tiempoMembresia != "- - - - - -" && metodoPago != "- - - - - - - - - - - -"){
             try {
                 Miembros miembro = new Miembros(telefono, correo, nombre, apellidoPaterno, apellidoMaterno, direccion, fechaNacimiento, fechaInicio, imgMiembroFile, true);
                 Membresias membresia = new Membresias(0, telefono, tipoMem, tiempoMembresia, fechaInicio, fechaTermino, true);
@@ -719,6 +719,8 @@ public class NuevoMiembroFrame extends javax.swing.JDialog {
                 Logger.getLogger(NuevoMiembroFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         this.dispose();
+        }else{
+            JOptionPane.showMessageDialog(this, "No has seleccionado todos los campos");
         }
     }//GEN-LAST:event_btnGuardarMiembroActionPerformed
 
